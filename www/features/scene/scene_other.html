@@ -1,0 +1,267 @@
+<div class="ng-cloak js_dialog" id="id-particle-pane" style="display: none;"
+     ng-click="sc.EditorService.onEventByToolbar($event)"
+     on-touch="sc.EditorService.onEventByToolbar($event)"
+     on-touch-start="sc.EditorService.onEventByToolbar($event)"
+     on-tap="sc.EditorService.onEventByToolbar($event)"
+     on-drag="sc.EditorService.onEventByToolbar($event)">
+  <div class="weui-mask"></div>
+  <div class="weui-dialog">
+    <div class="weui-dialog__hd"><strong class="weui-dialog__title">Particle Effect</strong></div>
+    <div class="weui-dialog__bd" ng-show="false">已经设置的粒子效果：1,2,3</div>
+    <button class="weui-btn weui-btn_mini weui-btn_default ion-ios-rainy"
+            ng-click="sc.EditorService.insertRain();sc.preview($event)">
+      Rain
+    </button>
+    <button class="weui-btn weui-btn_mini weui-btn_default ion-ios-snowy"
+            ng-click="sc.EditorService.insertSnow();sc.preview($event)">
+      Snow
+    </button>
+    <button class="weui-btn weui-btn_mini weui-btn_default"
+            ng-click="sc.EditorService.insertMoney();sc.preview($event)">
+      Gold
+    </button>
+    <button class="weui-btn weui-btn_mini weui-btn_default ion-play" ng-click="sc.applyParticle($event)">
+      Apply
+    </button>
+    <button class="weui-btn weui-btn_mini weui-btn_default ion-pause" ng-click="sc.ParticleMgr.stop($event)">
+      Stop
+    </button>
+    <button class="weui-btn weui-btn_mini weui-btn_default ion-pause"
+            ng-click="sc.ParticleMgr.deleteItem($event)">
+      Del
+    </button>
+    <div class="item range">
+      <i>Speed</i>
+      <input type="range" name="volume" min="0" max="400" ng-model="sc.getParticleOps().v0">
+      <i>{{sc.getParticleOps().v0}}</i>
+    </div>
+
+    <div class="item range range-positive">
+      <i>Direction</i>
+      <input type="range" name="volume" min="0" max="10" ng-model="sc.getParticleOps().nDirection">
+      <i>{{sc.getParticleOps().nDirection}}</i>
+    </div>
+
+    <div class="item range range-positive">
+      <i>Density</i>
+      <input type="range" name="volume" min="0" max="10" ng-model="sc.getParticleOps().nDensity">
+      <i>{{sc.getParticleOps().nDensity}}</i>
+    </div>
+
+    <div class="item range range-positive">
+      <i>Size</i>
+      <input type="range" name="volume" min="0" max="10" ng-model="sc.getParticleOps().nStartSize">
+      <i>{{sc.getParticleOps().nStartSize}}</i>
+    </div>
+    <div class="weui-dialog__ft">
+      <button class="weui-dialog__btn weui-dialog__btn_default" ng-click="sc.closeParticlePane()">Cancle</button>
+      <button class="weui-dialog__btn weui-dialog__btn_primary" ng-click="sc.closeParticlePane()">OK</button>
+    </div>
+  </div>
+</div>
+
+<div id="id-animation-time-slider" class="ng-cloak sliderbar-layer side-bar-right inline" ng-show="sc.amPaneOn"
+     ng-class="sideBarPos">
+  <div class="toolbox-close-btn-layer win-close-btn-div">
+    <button id="id-am-save" class="win-btn ion-checkmark-circled color-white"
+            ng-click="sc.saveAm(); sc.closeAmPane();" title={{sc.getStr("OK")}}></button>
+    <button id="id-am-close" class="win-btn ion-close-circled color-white"
+            ng-click="sc.closeAmPane()" title={{sc.getStr("Cancel")}}></button>
+  </div>
+  <ul>
+    <li class="weui-btn-name" ng-repeat="sag in sc.sags">
+      <div class="weui-btn-show" ng-hide="sc.hasClicked($index)"
+           ng-click="sc.onClickAnimation($index); {{sag.onClick}}">
+        {{sc.getStr(sag.name)}}
+      </div>
+      <div class="weui-btn-hide" ng-show="sc.hasClicked($index)" ng-click={{sag.onClick}}>
+        <div class="weui-btn-name-h">{{sag.name}}</div>
+        <i style="font-size: 25px;" ng-click="sc.showSagSlider()"></i>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<!--
+            <button class="btn-big ion-gear-b"  ng-show="false"></button>
+            <button class="btn-big ion-home"  ng-click="sc.openMyWork()" ng-show="false"></button>
+-->
+
+
+<div ng-show="false" class="ng-cloak action-menu toolbar-layer">
+  <div class="inline">
+    <ul>
+      <li ng-class="[sc.ngToolBtn, sc.SelectSet.btnEffect.group]" id='id-group'
+          title={{sc.getStr("group-elements-into-a-block")}} class="tool-btn ion-ios-box-outline"
+          ng-click="sc.SelectSet.multiCmdGroupIt()"></li>
+      <li ng-class="[sc.ngToolBtn, sc.SelectSet.btnEffect.joint]" id='id-joint'
+          title={{sc.getStr("joint-elements-into-chain")}} class="tool-btn ion-ios-color-filter-outline"
+          ng-click="sc.SelectSet.multiCmdJointIt()"></li>
+      <li ng-class="sc.ngToolBtn" id='id-explode' title={{sc.getStr("break-grouped-or-jointed-elements")}}
+          class="tool-btn  ion-ios-color-wand-outline" ng-click="sc.SelectSet.explode()"></li>
+      <li ng-class="sc.ngToolBtn" id='id-m-copy' title={{sc.getStr("copy-element-to-multiple-locations")}}
+          class="tool-btn  ion-ios-copy-outline" ng-click="sc.EditorService.mCopyToggle()"
+          ng-hide="sc.state.isMCopying"></li>
+      <li ng-class="sc.ngToolBtn" title={{sc.getStr("copy-element-to-multiple-locations")}}
+          class="tool-btn  ion-ios-copy" ng-click="sc.EditorService.mCopyToggle()"
+          ng-show="sc.state.isMCopying"></li>
+
+      <li ng-class="sc.ngToolBtn" id='id-undo' title={{sc.getStr("undo")}} class="tool-btn ion-ios-undo-outline"
+          ng-click="sc.undo();sc.closeSettingPanel()"></li>
+      <li ng-class="sc.ngToolBtn" id='id-redo' title={{sc.getStr("redo")}} class="tool-btn ion-ios-redo-outline"
+          ng-click="sc.redo();sc.closeSettingPanel()"></li>
+      <li ng-class="sc.ngToolBtn" id='id-sap-pane' title={{sc.getStr("set-simple-animation")}}
+          class="tool-btn ion-android-walk" ng-click="sc.openAmPane()"></li>
+      <!-- <li class="ion-ios-chatboxes" ng-click="sc.EditorService.attachTextBubble()"
+           ng-show="sc.state.isFont && !sc.state.hasBubble"></li>
+       <li class=" ion-ios-chatboxes-outline" ng-click="sc.EditorService.detachTextBubble()"
+           ng-show="sc.state.isFont && sc.state.hasBubble"></li>-->
+    </ul>
+  </div>
+</div>
+
+
+<div class="ng-cloak settings" id="id-setting-panel" style="" ng-show="sc.settingPanelOn">
+  <div class="dlg-title"><strong>{{sc.getStr("Settings")}}</strong></div>
+  <div ng-hide="sc.NEED_POLISH" class="settings-toggle">
+    <div class="settings-toggle-en" ng-click="sc.setLang('en');" style="border-right: 1px solid #f6f6f6;">
+      {{sc.getStr("en");}}
+    </div>
+    <div class="settings-toggle-zh" ng-click="sc.setLang('zh');">{{sc.getStr("zh");}}</div>
+  </div>
+  <button id='id-setting-close' class="toolbox-close-btn-layer win-close-btn ion-close-circled color-444"
+          ng-click="sc.closeSettingPanel()"></button>
+  <div class="settings-button">
+    <div class="settings-button-con">
+      <div id='id-create-2' class="tool-label ion-ios-arrow-right">
+        {{sc.getStr("Create-for")}}
+        <button id='id-create-for-mobile' ng-click="sc.selectCanvas('mobile');">
+          {{sc.isSelectedCanvas('mobile')}} <strong>{{sc.getStr("Mobile")}}</strong>
+        </button>
+        <button id='id-create-for-desktop' ng-click="sc.selectCanvas('desktop');">
+          {{sc.isSelectedCanvas('desktop')}} <strong>{{sc.getStr("Desktop")}}(800*600)</strong>
+        </button>
+        <button id='id-create-for-facebook' ng-click="sc.selectCanvas('facebook');">
+          {{sc.isSelectedCanvas('facebook')}} <strong>Facebook</strong>
+        </button>
+      </div>
+    </div>
+    <div class="settings-button-con" ng-click="sc.EditorService.cloneIt($event);sc.closeSettingPanel()">
+      <label id='id-clone-it' class="ion-ios-arrow-right tool-label">{{sc.getStr("Clone")}}</label>
+    </div>
+    <div class="settings-button-con" ng-click="sc.Config.snapOn = !sc.Config.snapOn;sc.closeSettingPanel()">
+      <label id='id-snap' class="ion-ios-arrow-right  tool-label">{{sc.getStr("Snap-to-grid")}}</label>
+    </div>
+
+    <div class="settings-button-con" ng-click="sc.openOpusPane($event);sc.closeSettingPanel()">
+      <label id='id-my-work' class="ion-ios-arrow-right tool-label">{{sc.getStr("My-work")}}</label>
+    </div>
+    <div ng-hide="sc.NEED_POLISH" class="settings-button-con" ng-click="sc.toggleRecord();sc.closeSettingPanel()">
+      <label id='id-recording' class="ion-ios-arrow-right tool-label">{{sc.getStr("Recording")}}</label>
+    </div>
+    <div ng-hide="sc.NEED_POLISH" class="settings-button-con"
+         ng-click="sc.orderTShirt($event);sc.closeSettingPanel()">
+      <label id='id-t-shirt' class="ion-ios-arrow-right tool-label">{{sc.getStr("Do-a-T-shirt")}}</label>
+    </div>
+    <div ng-hide="sc.NEED_POLISH" class="settings-button-con"
+         ng-click="sc.openParticlePane();sc.closeSettingPanel()">
+      <label id='id-special-effect' class="ion-ios-arrow-right tool-label">{{sc.getStr("Special-effect")}}</label>
+    </div>
+    <div class="settings-button-con" ng-click="sc.toggleTimeline(); sc.closeSettingPanel()">
+      <label id='id-setting-show-timeline'
+             class="ion-ios-arrow-right tool-label">{{sc.getStr("Show-timeline")}}</label>
+    </div>
+    <div ng-hide="sc.NEED_POLISH" class="settings-button-con" ng-click="sc.manageUser($event)">
+      <label id='id-manage' class="ion-ios-arrow-right tool-label">{{sc.getStr("Manage")}}</label>
+    </div>
+    <div ng-hide="sc.NEED_POLISH" class="settings-button-con" ng-click="sc.toggleKoutu();sc.closeSettingPanel()">
+      <label id='id-remove-bkg' class="ion-ios-arrow-right tool-label">{{sc.getStr("Remove-background")}}</label>
+    </div>
+
+    <div ng-show="sc.Config.koutuOn && !sc.NEED_POLISH">
+      <button class="btn-big ion-ionic"
+              ng-class="[{enabled: sc.Config.removeWhiteMarginOnly}, {disabled: !sc.Config.removeWhiteMarginOnly}]"
+              ng-click="sc.toggleRemoveWhiteMarginOnly()"></button>
+      <label id='id-remove-white-margin' class="ion-ios-arrow-right tool-label">{{sc.getStr("Remove-white-margin-only")}}</label>
+    </div>
+
+    <div ng-hide="sc.NEED_POLISH" class="settings-button-con"
+         ng-click="sc.toggleSubObjectMode();sc.closeSettingPanel()">
+      <label id='id-edit-part'
+             class="ion-ios-arrow-right tool-label">{{sc.getStr("Edit-part-in-component")}}</label>
+    </div>
+    <div class="settings-button-con" ng-click="sc.uploadScreenShot();sc.closeSettingPanel()">
+      <label id='id-take-screenshot'
+             class="ion-ios-arrow-right tool-label">{{sc.getStr("Take-screenshot")}}</label>
+    </div>
+    <div class="settings-button-con"
+         ng-click="sc.openHelpPanel($event); sc.closeSettingPanel()">
+      <label id='id-help-tutor' class="ion-ios-arrow-right tool-label">{{sc.getStr("Help")}}</label>
+    </div>
+
+    <div ng-hide="sc.NEED_POLISH" class="settings-button-con"
+         ng-click="sc.EditorService.toggleSpeed();sc.closeSettingPanel()">
+      <label id='id-play-faster' class="ion-ios-arrow-right tool-label">{{sc.getStr("Play-faster")}}</label>
+    </div>
+  </div>
+  <div class="settings-button-con log-out-button" ng-click="sc.logout();sc.closeSettingPanel()">
+    {{sc.getStr("Log out")}} {{sc.user.name}}
+  </div>
+</div>
+<div class="ng-cloak settings" id="id-help-panel" style="" ng-show="sc.helpPanelOn">
+  <div class="dlg-title"><strong>{{sc.getStr("Help")}}</strong></div>
+  <button class="toolbox-close-btn-layer win-close-btn ion-close-circled color-444"
+          ng-click="sc.closeHelpPanel()"></button>
+  <div class="settings-button">
+    <ul>
+      <li ng-repeat="help in sc.helps">
+        <div class="settings-button-con" ng-click="sc.helpTutor(help[1]);sc.closeHelpPanel()">
+          <label class="ion-ios-arrow-right tool-label">{{help[0]}}</label>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="ng-cloak settings" id="id-share-panel" style="display: none;">
+  <div class="dlg-title"><strong>{{sc.getStr("Share")}}</strong></div>
+  <button class="toolbox-close-btn-layer win-close-btn ion-close-circled color-444"
+          ng-click="sc.closeSharePanel()"></button>
+
+  <input id="id-opus-url" value="{{sc.opusUrl}}" class="visible-out-screen">
+  <input id="id-embed-codes" value="{{sc.embedCodes}}" class="visible-out-screen">
+
+  <div>
+    <label class="dlg-content-text">{{sc.getStr("Title")}}:</label>
+    <textarea tabindex="1" type="text" class="text-editor-div"
+              ng-model="sc.opusShareData.title" placeholder={{sc.getStr("title-of-the-message")}}></textarea>
+  </div>
+  <div>
+    <label class="dlg-content-text">{{sc.getStr("Content")}}:</label>
+    <textarea tabindex="2" type="text" class="text-editor-div"
+              ng-model="sc.opusShareData.description"
+              placeholder={{sc.getStr("content-of-the-message")}}></textarea>
+  </div>
+
+  <div class="settings-button">
+    <button ng-click="sc.applyShareData()" class="dialog-button-2 ion-checkmark-round">
+      {{sc.getStr("Save")}}
+    </button>
+    <button ng-click="sc.copyEmbedCodes()" class="dialog-button-2">{{sc.getStr("Embed-to-website")}}</button>
+    <button ng-click="sc.copyOpusUrl()" class="dialog-button-2">{{sc.getStr("Copy-link")}}</button>
+    <button ng-click="sc.state.shareToFbChecked = true; sc.confirmShare()"
+            class="dialog-button-2 dialog-button-primary-2 ion-social-facebook"></button>
+  </div>
+</div>
+
+<div class="ng-cloak settings" id="id-action-board" ng-show="sc.actionBoardOn && !sc.state.isPreviewMenuOn">
+  <div>
+    <button ng-click="sc.forwardShare()" class="dialog-button-1">{{sc.getStr("Share")}}</button>
+  </div>
+  <div>
+    <button ng-click="sc.customizeShare()" class="dialog-button-1">{{sc.getStr("DIY")}}</button>
+  </div>
+  <div>
+    <button ng-click="sc.closeActionBoard()" class="dialog-button-1">{{sc.getStr("Close")}}</button>
+  </div>
+</div>

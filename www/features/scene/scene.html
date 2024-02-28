@@ -1,0 +1,1114 @@
+<ion-view id="id-view" scroll="false" view-title={{sc.getStr("UDOIDO")}} ng-controller="sceneController as sc" ng-cloak on-long-press-tooltip="">
+  <div id="id-float-tool-top" ng-click="sc.EditorService.onEventByToolbar($event)"
+       class="ng-cloak float-tool float-tool2 top-bar toolbar-layer"
+       ng-class="sc.oneButtonWidth"
+       ng-show="!sc.wcyState.isPlayOnly && (sc.state.isPreviewMenuOn || sc.state.isAddMode || sc.state.isModifyMode)">
+    <div ng-show="(sc.state.isAddMode || sc.state.isModifyMode) && sc.state.topBarShow"
+         on-swipe-left="sc.topBarOff($event)">
+      <div class="tool-top-button">
+        <div class="inline mmx_edit_header" id="id_top_bar" ng-style="sc.state.topBarStyle">
+          <!--<ul style="margin-bottom: 0;">
+              <li ng-class="sc.ngToolBtn" id='id-share' class="tool-btn ion-share" title={{sc.getStr("share-to-social-media")}} ng-click="sc.openSharePanel()"></li>
+              <li ng-class="sc.ngToolBtn" id='id-setting' class="tool-btn ion-ios-gear-outline" title={{sc.getStr("settings-and-my-account")}} ng-click="sc.openSettingPanel($event)"></li>
+          </ul>-->
+          <ul>
+            <li ng-hide="sc.isRecordingAudioMode()" ng-class="sc.ngToolBtn" class="active"
+                id='id-add-element' title={{sc.getStr("add-background")}} ng-click="sc.openBkgPane($event)" on-long-press-tooltip="">
+              <div class="mmx_edit_con">
+                <div class="mmx_edit_icon desktop-button menu_i1"></div>
+              </div>
+            </li>
+            <li ng-hide="sc.isRecordingAudioMode()" ng-class="sc.ngToolBtn" class="" id='id-add-people'
+                title={{sc.getStr("add-people")}} ng-click="sc.openPeoplePane($event)" on-long-press-tooltip="">
+              <div class="mmx_edit_con">
+                <div class="mmx_edit_icon desktop-button menu_i2"></div>
+              </div>
+            </li>
+            <li ng-hide="sc.isRecordingAudioMode()" ng-class="sc.ngToolBtn" class="" id='id-add-prop'
+                title={{sc.getStr("add-prop")}} ng-click="sc.openPropPane($event)" on-long-press-tooltip="">
+              <div class="mmx_edit_con">
+                <div class="mmx_edit_icon desktop-button menu_i3"></div>
+              </div>
+            </li>
+            <li ng-hide="sc.isRecordingAudioMode()" ng-class="sc.ngToolBtn" class="" id='id-add-texts'
+                title={{sc.getStr("add-text")}} ng-click="sc.onAddText($event)" on-long-press-tooltip="">
+              <div class="mmx_edit_con">
+                <div class="mmx_edit_icon desktop-button menu_i4"></div>
+              </div>
+            </li>
+            <li ng-show="sc.isRecordingAudioMode()" ng-class="sc.ngToolBtn" class="" id='id-add-music'
+                title={{sc.getStr("add-music")}} ng-click="sc.openMusicPane($event)" on-long-press-tooltip="">
+              <div class="mmx_edit_con">
+                <div class="mmx_edit_icon desktop-button menu_i10"></div>
+              </div>
+            </li>
+            <li ng-class="sc.ngToolBtn" id='id-play' class="tool-btn" title={{sc.getStr("preview-opus")}}
+                ng-click="sc.preview($event)" on-long-press-tooltip="">
+              <div class="mmx_edit_con">
+                <div class="mmx_edit_icon desktop-button menu_i5"></div>
+              </div>
+            </li>
+          </ul>
+          <div class="btn_save_home" ng-hide="sc.isRecordingAudioMode()">
+            <span class="fl button2-bgc" ng-click="sc.saveWorkOnStage()" id="id-icon-save"
+                  title={{sc.getStr("Save")}} on-long-press-tooltip=""></span>
+            <span class="fr button2-bgc" ng-click="sc.preview($event);sc.openMyUdoido()" id="id-icon-home-page"
+                  title={{sc.getStr("My-space")}} on-long-press-tooltip=""></span>
+          </div>
+        </div>
+      </div>
+      <div ng-show="sc.state.isAddMode && sc.showMoreTopBar" title={{sc.getStr("more-functions")}}
+           ng-click="sc.less2More()" on-long-press-tooltip="">
+        <div ng-hide="sc.state.isRecording" class="inline">
+          <button class="btn-big ion-person-add inline" title={{sc.getStr("login")}}
+                  ng-click="sc.openLoginPanel($event)" ng-show="!sc.user.loggedIn" on-long-press-tooltip=""></button>
+          <button class="btn-big ion-ios-mic-off" title={{sc.getStr("audio-record-off")}}
+                  ng-click="sc.toggleRecord()"
+                  ng-show="sc.state.isRecording && sc.Config.hasAudioRecording" on-long-press-tooltip=""></button>
+          <button class="btn-big ion-ios-mic-outline" title={{sc.getStr("audio-record-on")}}
+                  ng-click="sc.toggleRecord()"
+                  ng-hide="sc.state.isRecording  || !sc.Config.hasAudioRecording" on-long-press-tooltip=""></button>
+        </div>
+      </div>
+    </div>
+    <div ng-hide="sc.state.topBarShow">
+      <button class="btn-shrink ion-ios-arrow-back" title={{sc.getStr("show-top-bar")}}
+              on-swipe-right="sc.topBarOn($event)"
+              ng-click="sc.topBarOn($event)" on-long-press-tooltip=""></button>
+    </div>
+  </div>
+
+  <div class="ng-cloak toolbar-layer-middle button2-bgc-bkg" ng-style="sc.accButtons[0]"
+       ng-hide="sc.state.editorMode !== sc.EDITOR_MODE.EDIT || sc.hideAccButton ||
+	     sc.amPaneOn || sc.clip || sc.SelectSet.isInMultiCmd()">
+    <div class="button2-smc" ng-class="sc.ngToolBtn" id="id-icon-delete" title={{sc.getStr("delete-this-element")}}
+         ng-click="sc.onDelete($event);" on-long-press-tooltip="">
+    </div>
+  </div>
+  <div class="ng-cloak toolbar-layer-middle button2-bgc-bkg" ng-style="sc.accButtons[1]"
+       ng-hide="sc.state.editorMode !== sc.EDITOR_MODE.EDIT || sc.hideAccButton ||
+	     sc.amPaneOn || sc.clip || sc.SelectSet.isInMultiCmd()">
+    <div class="button2-smc" ng-class="sc.ngToolBtn"
+         title={{sc.getStr("edit-text")}} id='id-icon-modify-element'
+         ng-click="sc.onMirrorBtn($event)" on-long-press-tooltip="">
+    </div>
+  </div>
+
+  <div class="ng-cloak scene_content" ng-show="sc.state.editorMode >= sc.EDITOR_MODE.EDIT">
+    <div class="scene_content_1">
+      <canvas id="testCanvas" class="pt-perspective content-layer canvas-con"
+              on-long-press="sc.onHoldCanvas($event)"
+              ng-style="sc.state.canvasStyle" ng-show="sc.state.readyToShow"></canvas>
+      <div id="id-page-effect1" class="pt-perspective page-effect-layer " ng-style="sc.state.canvasStyle"
+           ng-show="sc.pteState.page1On">
+        <img ng-src={{sc.pteState.page1Image}}>
+      </div>
+
+      <div id="timer-bar-div" class="ng-cloak toolbar-layer"
+           ng-show="!sc.amPaneOn && (sc.state.editorMode === sc.EDITOR_MODE.EDIT || sc.state.editorMode === sc.EDITOR_MODE.PREVIEW) && !sc.state.showTrimTimeline && (sc.state.isPreviewMenuOn || sc.state.showTimer)">
+        <rzslider data-rz-slider-model="sc.timelineSlider.minValue"
+                  data-rz-slider-options="sc.timelineSlider.options">
+        </rzslider>
+        <div ng-hide="sc.wcyState.isPlayOnly || sc.state.isPreviewMode">
+          <button title={{sc.getStr("cut-animation-through-timeline")}} class="ion-scissors"
+                  ng-click="sc.EditorService.turnOnTrim();" on-long-press-tooltip="">
+            Trim
+          </button>
+          <button title={{sc.getStr("extend-time-length-of-current-scene")}} class="ion-plus-round"
+                  ng-click="sc.adjustLevelTime(1)" on-long-press-tooltip=""></button>
+          <button title={{sc.getStr("shorten-time-length-of-current-scene")}} class="ion-minus-round"
+                  ng-click="sc.adjustLevelTime(-1)" on-long-press-tooltip=""></button>
+        </div>
+
+        <div>
+          <button title={{sc.getStr("pause")}} ng-hide="sc.TEMP_HIDE || sc.isPaused()"
+                  ng-click="sc.EditorService.pause();" class="ion-stop  icon-button" on-long-press-tooltip="">
+          </button>
+          <button title={{sc.getStr("resume")}} ng-show="!sc.TEMP_HIDE && sc.isPaused()"
+                  ng-click="sc.EditorService.resume();" class="ion-play  icon-button" on-long-press-tooltip="">
+          </button>
+        </div>
+
+      </div>
+      <div id="timeline-trim-div" class="ng-cloak toolbar-layer"
+           ng-show="sc.state.showTrimTimeline && !sc.wcyState.isPlayOnly && (sc.state.isPreviewMenuOn || sc.state.showTimer)">
+        <rzslider data-rz-slider-model="sc.timelineSlider.minValue"
+                  data-rz-slider-high="sc.timelineSlider.maxValue"
+                  data-rz-slider-options="sc.timelineSlider.options">
+        </rzslider>
+        <button class="ion-scissors" ng-click="sc.EditorService.trim();" ng-show="!sc.amPaneOn">Trim</button>
+      </div>
+
+      <div class="cao_icon toolbar-layer win-close-btn-div"
+           ng-style="sc.landscape_toolbar_style"
+           ng-show="sc.state.isTopicIntro">
+        <button class="button2-bgc" id="id-icon-edit" ng-click="sc.cloneIt($event)" ng-show="sc.user.canCT"></button>
+        <button class="button2-bgc" id="id-icon-new" ng-click="sc.joinTopic()"></button>
+        <button class="button2-bgc" id="id-icon-change-bg" ng-click="sc.openTopicPage()"></button>
+      </div>
+      <div class="cao_icon button2-bgc-height toolbar-layer"
+           ng-style="sc.state.toolbarStyle"
+           ng-show="!sc.showFullThumbs && !sc.state.isTopicIntro && !sc.amPaneOn && !sc.isMirrorBtn">
+        <ul>
+          <li ng-click="sc.undo()" id="id-icon-undo" class="button2-bgc"
+              title={{sc.getStr("undo")}} on-long-press-tooltip=""></li>
+          <li ng-click="sc.redo()" id="id-icon-redo" class="button2-bgc"
+              title={{sc.getStr("redo")}} on-long-press-tooltip=""></li>
+          <li class="button2-bgc" ng-class="sc.ngToolBtn" id='id-icon-pin' ng-show="sc.stLocked==0"
+              title={{sc.getStr("lock-this-element-to-prevent-any-change")}} ng-click="sc.pinIt()" on-long-press-tooltip=""></li>
+          <li class="button2-bgc" ng-class="sc.ngToolBtn" id='id-icon-unpin' ng-show="sc.stLocked==2"
+              title={{sc.getStr("unlock-this-element")}} ng-click="sc.pinIt()" on-long-press-tooltip=""></li>
+          <li class="button2-bgc" ng-class="sc.ngToolBtn" id="id-icon-up-layer"
+              ng-click="sc.onMoveUpLayer($event)"
+              title={{sc.getStr("move-to-upper-layer")}} on-long-press-tooltip=""></li>
+          <li class="button2-bgc" ng-class="sc.ngToolBtn" id="id-icon-down-layer"
+              ng-click="sc.onMoveDownLayer($event)"
+              title={{sc.getStr("move-to-lower-layer")}} on-long-press-tooltip=""></li>
+          <li id="id-icon-joint" class="button2-bgc" ng-class="[sc.SelectSet.btnEffect.joint]"
+              ng-click="sc.SelectSet.multiCmdJointIt()"
+              title={{sc.getStr("joint-elements-into-chain")}} on-long-press-tooltip=""></li>
+          <li id="id-icon-limit-joint" class="button2-bgc" ng-class="[sc.SelectSet.btnEffect.limitJoint]"
+              ng-click="sc.SelectSet.multiCmdLimitJoint()"
+              title={{sc.getStr("limit-joint-rotation-scope")}} on-long-press-tooltip=""></li>
+          <li id="id-icon-group" class="button2-bgc" ng-class="[sc.SelectSet.btnEffect.group]"
+              ng-click="sc.SelectSet.multiCmdGroupIt()"
+              title={{sc.getStr("group-elements-into-a-block")}} on-long-press-tooltip=""></li>
+          <li id="id-icon-ungroup" class="button2-bgc"
+              ng-click="sc.SelectSet.explode()"
+              title={{sc.getStr("Explode")}} on-long-press-tooltip=""></li>
+          <li class="button2-bgc" ng-class="[sc.SelectSet.btnEffect.mCopy]"
+              ng-click="sc.EditorService.mCopyToggle()" id="id-icon-m-copy"
+              title={{sc.getStr("copy-element-to-multiple-locations")}} on-long-press-tooltip=""></li>
+        </ul>
+      </div>
+
+      <div class="footer footer-height toolbar-layer"
+           ng-style="sc.landscape_toolbar_style"
+           id="id-footer"
+           ng-show="!sc.isRecordingAudioMode() && (sc.state.isAddMode || sc.state.isModifyMode) && sc.state.topBarShow">
+        <!--动画列表start-->
+        <div id="id-animation-editor" class="mmx-popup-toolbar-layer" ng-show="sc.amPaneOn">
+          <span class="toolbox-close-btn-layer right-align">
+            <button id="id-icon-plus-bg" class="button2-bgc"
+                    ng-click="sc.adjustLevelTime(1)"
+                    title={{sc.getStr("Increase-time")}} on-long-press-tooltip=""></button>
+            <button id="id-icon-minus-bg" class="button2-bgc"
+                    ng-click="sc.adjustLevelTime(-1)"
+                    title={{sc.getStr("Decrease-time")}} on-long-press-tooltip=""></button>
+            <button id="id-icon-ok-bg" class="button2-bgc"
+                    ng-click="sc.saveAm(); sc.closeAmPane();" title={{sc.getStr("OK")}} on-long-press-tooltip=""></button>
+            <button id="id-icon-close-bg" class="button2-bgc"
+                    ng-click="sc.closeAmPane()" title={{sc.getStr("Cancel")}} on-long-press-tooltip=""></button>
+          </span>
+          <div>
+            <button id="id-icon-in-sag" class="button2-bgc" ng-click="sc.onSelectSagCategory(1)"
+                    title={{sc.getStr("Enter-stage-animation")}} on-long-press-tooltip=""></button>
+            <button id="id-icon-idle-sag" class="button2-bgc" ng-click="sc.onSelectSagCategory(2)"
+                    title={{sc.getStr("Idle-animation")}} on-long-press-tooltip=""></button>
+            <button id="id-icon-leave-sag" class="button2-bgc" ng-click="sc.onSelectSagCategory(3)"
+                    title={{sc.getStr("Exit-stage-animation")}} on-long-press-tooltip=""></button>
+          </div>
+          <div class="list_animation">
+            <ul ng-show="sc.sagCategoryId === 1">
+              <li ng-repeat="sag in sc.inSags">
+                <span ng-click="sc.onClickAnimation($index); {{sag.onClick}}">
+                  <button id={{sag.icon}} class="button2-bgc"
+                          title={{sc.getStr(sag.name)}} on-long-press-tooltip=""></button>
+                </span>
+              </li>
+            </ul>
+            <ul ng-show="sc.sagCategoryId === 2">
+              <li ng-repeat="sag in sc.idleSags">
+                <span ng-click="sc.onClickAnimation($index); {{sag.onClick}}">
+                  <button id={{sag.icon}} class="button2-bgc"
+                          title={{sc.getStr(sag.name)}} on-long-press-tooltip=""></button>
+                </span>
+              </li>
+            </ul>
+            <ul ng-show="sc.sagCategoryId === 3">
+              <li ng-repeat="sag in sc.outSags">
+                <span ng-click="sc.onClickAnimation($index); {{sag.onClick}}">
+                  <button id={{sag.icon}} class="button2-bgc"
+                          title={{sc.getStr(sag.name)}} on-long-press-tooltip=""></button>
+                </span>
+              </li>
+            </ul>
+          </div>
+          <div id="id-animation-slider" ng-show="sc.amPaneOn" class="toolbar-layer rzsliderSlider clearfix">
+            <ul class="time_list">
+              <!-- <li>速度</li>
+          <li>延时</li> -->
+              <li title="Delay" on-long-press-tooltip="">
+                <rzslider data-rz-slider-model="sc.am.tDelay"
+                          data-rz-slider-options="sc.am.delayOptions">
+                </rzslider>
+              </li>
+              <li title="Duration" on-long-press-tooltip="">
+                <rzslider data-rz-slider-model="sc.am.tDuration"
+                          data-rz-slider-options="sc.am.durationOptions">
+                </rzslider>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+        <!--动画列表end-->
+        <div class="mirrors button2-bgc-height toolbar-layer-middle" id='mirrors_btn'
+             ng-style="sc.mirrorsBtnStyle"
+             ng-show="sc.isMirrorBtn">
+          <ul>
+            <li ng-click="sc.onEdit($event)" ng-class="sc.ngToolBtn" class="button2-bgc"
+                id="id-icon-change-skin" ng-hide="sc.state.isIComponent && !sc.IN_DEV"
+                title={{sc.getStr("Replace-skin")}} on-long-press-tooltip=""></li>
+            <li ng-click="sc.onMirrorX($event)" id="id-icon-mirror-x" class="button2-bgc"
+                title={{sc.getStr("Mirror-X")}} on-long-press-tooltip=""></li>
+            <li ng-click="sc.onMirrorY($event)" id="id-icon-mirror-y" class="button2-bgc"
+                title={{sc.getStr("Mirror-Y")}} on-long-press-tooltip=""></li>
+            <li ng-click="sc.openAmPane($event)" id="id-icon-animation" class="button2-bgc"
+                title={{sc.getStr("Animation")}} on-long-press-tooltip=""></li>
+          </ul>
+        </div>
+      </div>
+      <div id="id-mic-panel" class="rideo_active mmx-popup-layer"
+           ng-show="sc.isAudioRecording() || sc.isAudioPending()">
+        <p class="redio_text tc redio_text_click">0:00</p>
+        <button id="id-icon-voice-record" class="button2-bgc"
+                style="right: 50%; position: absolute; transform: translate(50%, 0);"
+                ng-click="sc.stopAudioRecording()" ng-show="sc.isAudioRecording()">
+        </button>
+        <table style="width: 100%">
+          <tr>
+            <td align="center">
+              <button class="button2-bgc" id="id-icon-change-bg"
+                      ng-click="sc.restartSoundRecoding()" ng-hide="sc.isAudioRecording()">
+              </button>
+            </td>
+            <td align="center">
+              <button class="button2-bgc" id="id-icon-ok2"
+                      ng-click="sc.acceptSound()" ng-hide="sc.isAudioRecording()">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script id="imagePane__html" type="text/ng-template">
+    <ion-modal-view>
+      <ion-content id="mat-pane-div"
+                   on-swipe-up="sc.nextPage($event)" on-swipe-down="sc.prevPage($event)">
+        <div class="panel-top-bar cang_jing" ng-style="sc.state.matPaneStyle">
+          <div class="dao_ju_icon">
+            <ul style="height: 1.2rem;">
+              <li title="insert from camera" id="id-icon-camera" class="button2-bgc" ng-hide="sc.isMusic" ng-click="sc.clickBtnCamera($event)" on-long-press-tooltip="">
+                <input type="file" id="id-input-camera"
+                       accept="image/*" capture="camera"
+                       style="display : none">
+              </li>
+              <li title="Record voive" id="id-icon-voice-record" class="button2-bgc" ng-show="sc.isMusic && sc.state.canRecordVoice"
+                  ng-click="sc.insertFromMic(true)" on-long-press-tooltip="">
+              </li>
+              <li title="Insert sound files" id="id-icon-sounds" class="button2-bgc" ng-show="sc.isMusic" ng-click="sc.clickBtnSound($event)" on-long-press-tooltip="">
+                <input type="file" id="id-input-sound-files"
+                       accept="video/mp4,video/x-m4v,video/*,audio/mp3,aud"
+                       multiple="true"
+                       style="display : none">
+              </li>
+              <li title="Insert from album" id="id-icon-album" class="button2-bgc" ng-hide="sc.isMusic" ng-click="sc.clickBtnAlbum($event)" on-long-press-tooltip="">
+                <input type="file" id="id-input-local-files"
+                       accept=".bmp, .gif, .jpeg, .png, image/bmp, image/gif, image/jpeg, image/jpg, image/png, image/*" multiple="true"
+                       style="display : none">
+                </label>
+              </li>
+              <li title="manage-sounds" id="id-icon-edit" class="button2-bgc" ng-show="sc.isMusic"
+                  ng-click="sc.openSoundElementPane($event)" on-long-press-tooltip="">
+              </li>
+              <li title="Stop sounds" id="id-icon-stop-sound" class="button2-bgc" ng-show="sc.isMusic"
+                  ng-click="sc.stopAllSounds($event)" on-long-press-tooltip="">
+              </li>
+              <li title={{sc.getStr("level-manager")}} id="id-icon-scene-mgr" class="button2-bgc" ng-show="sc.isBackground"
+                  ng-click="sc.openLevelManager($event);" on-long-press-tooltip="">
+              </li>
+              <li title="Previous Page" id="id-icon-arrow-up" class="button2-bgc"
+                  ng-click="sc.prevPage($event)" on-long-press-tooltip="">
+              </li>
+              <li title="next Page" id="id-icon-arrow-down" class="button2-bgc"
+                  ng-click="sc.nextPage($event)" on-long-press-tooltip="">
+              </li>
+              <li title="Edit Material" id="id-icon-edit" class="button2-bgc"
+                  ng-click="sc.toggleEditMat($event)" on-long-press-tooltip="">
+              </li>
+              <li title={{sc.getStr("AI Made")}} id="id-icon-rotate" class="button2-bgc"
+                  ng-click="sc.openAIPane($event)" on-long-press-tooltip="">
+              </li>              
+            </ul>
+          </div>
+          <div class="chang_jing_img" type="item-text-wrap" ng-hide="sc.isMusic">
+            <ul class="chang_jing_img_list">
+              <li ng-click="sc.pickProp(prop)" ng-show="!!prop || !!prop.thumbPath"
+                  ng-repeat="prop in sc.props">
+                <div class="chang_jign_icon active">
+                  <img ng-hide="sc.isMusic" ng-src="{{prop.thumbPath}}" alt="{{prop.wcyId}}">
+                  <div class="buttons" ng-show="sc.enableEditMat">
+                    <button ng-click="sc.onBan(prop, $event)" ng-show="prop.authorId==sc.user.ID || sc.user.canAdmin">
+                      {{sc.getStr("Delete")}}
+                    </button>
+                    <button ng-click="sc.onPublish(prop, $event)" ng-hide="prop.isShared">
+                      {{sc.getStr("Publish")}}
+                    </button>
+                  </div>
+                </div>
+                <div ng-show="sc.isMusic">{{prop.name}}</div>
+                <div class="s1" ng-show="prop.selected">
+                  <img src="img/accept_right.png" width="40">
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="mmx_music" type="item-text-wrap" ng-show="sc.isMusic">
+            <ul class="mmx_music_list">
+              <li ng-class="sc.getTryingMusicStyle(prop)" ng-repeat="prop in sc.props"
+                  ng-click="sc.onTryMusic(prop)">
+                <div class="music_buttons">
+                  <span ng-show="!prop.isUsing && sc.isTryingMusic(prop)" class="music_use_btn"
+                        ng-click="sc.onApplyMusic(prop)">
+                    使用
+                  </span>
+                  <span ng-show="!prop.isUsing && sc.isTryingMusic(prop)" class="music_use_btn"
+                        ng-click="sc.onApplyMusic(prop, true)">
+                    跨场景
+                  </span>
+                  <span ng-show="!prop.isUsing && sc.isTryingMusic(prop)"
+                        class="music_use_btn" ng-click="sc.onBanSound(prop)"
+                        style="background-color:red">
+                    删除
+                  </span>
+                  <span ng-show="prop.isUsing" class="music_use_btn"
+                        ng-click="sc.onDeleteSound(prop)"
+                        style="background-color:red">
+                    删除
+                  </span>
+                  <span ng-show="sc.user.canCT && !prop.isUsing && sc.isTryingMusic(prop)" class="music_use_btn"
+                        ng-click="sc.onConfigMusic(prop)">编辑</span>
+                </div>
+                <span ng-show="!prop.isUsing && sc.isTryingMusic(prop)" class="bo_img">
+                  <img src="img/changjing/yinyue_bo.png">
+                </span>
+                <p>
+                  <span class="music_name">{{prop.name}}</span>
+                </p>
+                <p>01:00</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </ion-content>
+    </ion-modal-view>
+  </script>
+  <script id="id_levelManager__html" type="text/ng-template">
+    <ion-modal-view>
+      <ion-content id="tool-pane-div"
+                   on-swipe-up="sc.nextPage($event)" on-swipe-down="sc.prevPage($event)">
+        <div class="panel-top-bar cang_jing" ng-style="sc.state.matPaneStyle">
+          <div class="dao_ju_icon">
+            <ul style="height: 1.2rem;">
+              <li title="Duplicate current scene" id="id-icon-clone" class="button2-bgc" ng-show="sc.isBackground"
+                  ng-click="sc.duplicateCurrentLevel();" on-long-press-tooltip="">
+              </li>
+              <li title={{sc.getStr("add-scene")}} id='id-icon-new' class="button2-bgc" ng-show="sc.isBackground"
+                  ng-click="sc.addLevel($event);" on-long-press-tooltip="">
+              </li>
+              <li title={{sc.getStr("delete-scene")}} id='id-icon-trash-bg' class="button2-bgc" ng-show="sc.isBackground"
+                  ng-click="sc.onDeleteCurrentLevel($event)" on-long-press-tooltip="">
+              </li>
+              <li ng-click="sc.closePane($event)" on-long-press-tooltip="">
+                <button id="id-icon-close-bg" class="button2-bgc"></button>
+              </li>
+            </ul>
+          </div>
+          <div class="level-thumb-img" type="item-text-wrap">
+            <ul id="id_bottom_bar" class="level-thumb-pane-height level-thumb"
+                ng-style="sc.state.levelThumbsStyle">
+              <li ng-repeat="img64 in sc.levelThumbs" ng-click="sc.onSelectLevel($event, $index)"
+                  on-long-press="sc.onHoldLevel($event, $index)" ng-class="sc.getActiveLevelStyle($index)"
+                  class="level-thumb-frame" style="position:relative;">
+                <img ng-src={{img64.src}} alt={{$index}} class="level-thumb-img">
+                <ul ng-show="sc.isHold($index)"
+                    style="position: absolute; top: 10px; padding:auto; width:100%;">
+                  <li>
+                    <button ng-click="sc.onDeleteLevel($event, $index)"
+                            style="display:block; width:100%; align-items: center">
+                      删除
+                    </button>
+                  </li>
+                  <li>
+                    <button ng-click="sc.duplicateCurrentLevel($event)"
+                            style="display:block; width:100%; align-items: center">
+                      复制
+                    </button>
+                  </li>
+                </ul>
+              </li>
+              <li class="add_img level-thumb-frame" ng-click="sc.addLevel($event);">
+                <img src="img/add_icon.png">
+              </li>
+            </ul>
+          </div>
+        </div>
+      </ion-content>
+    </ion-modal-view>
+  </script>
+
+  <div class="my_mmx_work" id="my_work" ng-show="sc.state.editorMode === sc.EDITOR_MODE.MY_WORK">
+    <div>
+      <span style="font-size: 0.8rem; position: relative; height: 1rem; border: none;">{{sc.getStr("My-space")}}</span>
+      <ul style="height: 1.2rem; float: right">
+        <li id="id-icon-back-arrow" class="mmx-top-layer button2-bgc inline-button" ng-click="sc.goBack()"
+            title={{sc.getStr("Back")}} on-long-press-tooltip=""></li>
+        <li id="id-icon-new" class="mmx-top-layer button2-bgc inline-button" ng-show="sc.canEdit()" ng-click="sc.createNewOpus()"
+            title={{sc.getStr("new")}} on-long-press-tooltip=""></li>
+        <li id="id-icon-logout" class="mmx-top-layer button2-bgc inline-button" ng-click="sc.logout($event)"
+            title={{sc.getStr("Logout")}} on-long-press-tooltip=""></li>
+      </ul>
+    </div>
+    <div class="weui-cell weui-cell_warn user-id" ng-click="sc.loginActiveField = 5"
+         ng-show="sc.user.canAdmin">
+      <div>
+        <span>User ID</span>
+      </div>
+      <div class="weui-cell__bd">
+        <input tabindex="1" type="number" class="weui-input font-login-normal"
+               value="weui input" ng-model="sc.userPrivilegeToSet" placeholder={{sc.getStr("12345678")}}>
+      </div>
+      <div>
+        <span>Privilege</span>
+      </div>
+      <div class="weui-cell__bd">
+        <input tabindex="2" type="number" class="weui-input font-login-normal"
+               value="weui input" ng-model="sc.userIDtoSet" placeholder={{sc.getStr("256")}}>
+      </div>
+      <button id="id-icon-ok" class="mmx-top-layer button2-bgc inline-button" ng-click="sc.setPrivilege()"
+              title={{sc.getStr("Set Privilege")}} on-long-press-tooltip=""></button>
+    </div>
+    <div class="mmx_works_list_con mt2 content-layer">
+      <div ng-hide="sc.opusDataReady">{{sc.getStr("Loading...")}}</div>
+      <ul class="mmx_works_list" ng-style="sc.opusThumbListStyle">
+        <li ng-repeat="opus in sc.props" ng-click="sc.openOpus(opus)" ng-style="sc.opusThumbStyle" ng-hide="!opus">
+          <img ng-src="{{opus.thumbPath}}" alt="{{opus._id}}">
+          <div class="mmx_works_news">
+            <div class="mmx_works_news_con">
+              <span class="fl text_mmx_work white">{{opus.title}}</span>
+            </div>
+            <div class="mmx_works_news_name">
+              <div class="buttons">
+                <button ng-click="sc.onBan(opus, $event)">
+                  {{sc.getStr("Delete")}}
+                </button>
+                <button ng-click="sc.onPublish(opus, $event)"
+                        ng-show="opus.state === sc.OPUS_STATE.PRIVATE">
+                  {{sc.getStr("Publish")}}
+                </button>
+              </div>
+              <span ng-show="opus.state === sc.OPUS_STATE.BAN">
+                {{sc.getStr("Banned")}}
+              </span>
+              <span ng-show="opus.state === sc.OPUS_STATE.FINE">
+                {{sc.getStr("Fine")}}
+              </span>
+              <span class="fl name_mmx_work white">
+                <span>{{opus.authorName}}</span>
+                <span style="display: none">{{opus.userAge}}岁</span>
+              </span>
+              <span class="fr name_mmx_number">
+                <i class="mmx_collection_icon"></i>
+                <span class="white"><!--{{opus.score}}--> 0</span>
+              </span>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="ng-cloak fixed-block mmx-top-layer" id="id-login-panel"
+       ng-show="sc.state.editorMode === sc.EDITOR_MODE.LOGIN && sc.state.isForgetPassword == false">
+    <header class="mmx-header-default mmx-header-fixed" style="background-color: #eee">
+      <button class="ion-ios-arrow-back icon-button" ng-click="sc.closeLoginPanel()"></button>
+      <div class="mmx-header-center mmx-header-center-clear">
+        <div class="mmx-header-center-logo">
+          <div class="" ng-show="!sc.state.isSignUping">{{sc.getStr("Login")}}</div>
+          <div class="" ng-show="sc.state.isSignUping">{{sc.getStr("Sign-up")}}</div>
+        </div>
+      </div>
+    </header>
+    <div class="model-login login">
+      <div id="id-login-form">
+        <div class="weui-cells weui-cells_form">
+          <div class="weui-cell weui-cell_warn user-id" ng-click="sc.loginActiveField = 2">
+            <div>
+              <span>{{sc.getStr("User-name")}}</span>
+            </div>
+            <div class="weui-cell__bd">
+              <input tabindex="1" type="text" class="weui-input font-login-normal"
+                     value="weui input error"
+                     ng-model="sc.userName" placeholder={{sc.getStr("your-email-address-or-phone")}}>
+              <!-- <label class="login-tips" ng-show="sc.state.isSignUping && (!sc.userName || sc.userName.length <8) && (sc.loginActiveField===2)">
+                  {{sc.getStr("8+-characters-and-numbers")}}</label> -->
+            </div>
+            <div class="weui-cell__ft">
+              <i class="weui-icon-warn"></i>
+            </div>
+          </div>
+          <label class="weui-cell_warn font-login-normal" ng-show="sc.user.nameError">
+            {{sc.getStr("it's-invalid-or-already-taken")}}
+          </label>
+
+          <div class="weui-cell weui-cell_warn user-id" ng-click="sc.loginActiveField = 3">
+            <div>
+              <span>{{sc.getStr("Password")}}</span>
+            </div>
+            <div class="weui-cell__bd">
+              <input tabindex="2" class="weui-input font-login-normal" type="password"
+                     value="weui input error"
+                     ng-model="sc.userPsw" placeholder={{sc.getStr("password-placeholder")}}>
+            </div>
+            <div class="weui-cell__ft" ng-show="sc.user.passwordError">
+              <i class="weui-icon-warn"></i>
+            </div>
+          </div>
+          <div class="weui-cell weui-cell_warn user-id" ng-click="sc.loginActiveField = 3"
+               ng-show="sc.state.isSignUping">
+            <div>
+              <span>{{sc.getStr("Confirm-password")}}</span>
+            </div>
+            <div class="weui-cell__bd">
+              <input tabindex="3" class="weui-input font-login-normal" type="password"
+                     value="weui input error" ng-model="sc.userPswConfirm"
+                     placeholder={{sc.getStr("confirm-password")}}>
+            </div>
+            <div class="weui-cell__ft" ng-show="sc.user.passwordError">
+              <i class="weui-icon-warn"></i>
+            </div>
+          </div>
+          <label class="color-warn font-login-normal" ng-show="sc.user.passwordError">
+            {{sc.getStr("invalid-user-name-or-password")}}
+          </label>
+
+          <div class="weui-cell weui-cell_warn user-id" ng-click="sc.loginActiveField = 4"
+               ng-show="!sc.NEED_POLISH && sc.state.isSignUping">
+            <div>
+              <span>昵称</span>
+            </div>
+            <div class="weui-cell__bd">
+              <input tabindex="4" type="text" class="weui-input font-login-normal"
+                     value="weui input error"
+                     ng-model="sc.userDisplayName" placeholder={{sc.getStr("good-name-i-loved")}}>
+            </div>
+          </div>
+          <div class="weui-cell weui-cell_warn user-id" ng-click="sc.loginActiveField = 5"
+               ng-show="!sc.NEED_POLISH && sc.state.isSignUping">
+            <div>
+              <span>邀请码</span>
+            </div>
+            <div class="weui-cell__bd">
+              <input tabindex="5" class="weui-input font-login-normal"
+                     value="weui input error" ng-model="sc.userGroupId"
+                     placeholder={{sc.getStr("user-group-id")}}>
+            </div>
+          </div>
+          <div class="weui-cell weui-cell_warn user-id" ng-click="sc.loginActiveField = 6"
+               ng-show="!sc.NEED_POLISH && sc.state.isSignUping">
+            <div>
+              <span>我是:</span>
+            </div>
+            <button ng-click="sc.user.type=sc.USER_TYPE.STUDENT">{{sc.userIs(1)}}学生</button>
+            <button ng-click="sc.user.type=sc.USER_TYPE.PARENT">{{sc.userIs(2)}}家长</button>
+            <button ng-click="sc.user.type=sc.USER_TYPE.TEACHER">{{sc.userIs(3)}}教师</button>
+            <button ng-click="sc.user.type=sc.USER_TYPE.CREATIVE_TEACHER">{{sc.userIs(4)}}创新</button>
+          </div>
+
+        </div>
+        <div class="weui-btn-area">
+          <button tabindex="4" class="button font-login-normal full-div-width loginBtn-true"
+                  ng-show="!sc.state.isSignUping" ng-click="sc.signUpOrLogin($event)">
+            {{sc.getStr("Login")}}
+          </button>
+          <div ng-show="!sc.NEED_POLISH" class="login-option clearfix">
+            <a class="login-register external" ng-click="sc.switchToSignUp()"
+               ng-show="!sc.state.isSignUping">{{sc.getStr(Signup)}}</a>
+            <a class="login-find external" ng-show="sc.IN_DEV && !sc.state.isSignUping">{{sc.getStr("Get-back-password")}}</a>
+          </div>
+          <button tabindex="5" class="button font-login-normal full-div-width loginBtn-true"
+                  ng-show="sc.state.isSignUping" ng-click="sc.signUpOrLogin($event)">
+            {{sc.getStr("Sign-up-for-UDOIDO")}}
+          </button>
+          <div class="login-option clearfix" ng-show="sc.state.isSignUping">
+            <a class="login-register external" tabindex="8" ng-click="sc.switchToLogin()">
+              {{sc.getStr("Have-account-?-Login")}}
+            </a>
+          </div>
+        </div>
+        <label class="weui-agree" ng-show="false && sc.state.isSignUping">
+          <input tabindex="5" type="checkbox">
+          <span class="weui-agree__text">
+            {{sc.getStr("By-clicking")}} {{sc.getStr("Sign-up-for-UDOIDO")}}, {{sc.getStr("you agree")}}
+            <a href="">{{sc.getStr("our terms of service")}}</a>
+            and <a href="">{{sc.getStr("privacy-policy")}}</a>. {{sc.getStr("We’ll occasionally send you account related emails")}}.
+          </span>
+        </label>
+        <div ng-hide="sc.NEED_POLISH" class="sign-in-with">
+          <div class="sign-in-l">{{sc.getStr("Sign-in-with")}}</div>
+          <ul>
+            <li ng-click="sc.authenticate('facebook')" class="ion-social-facebook"></li>
+            <li ng-click="sc.authenticate('twitter')" class="ion-social-twitter"></li>
+            <li ng-click="sc.authenticate('google')" class="ion-social-googleplus-outline"
+                style="margin-right: 0"></li>
+          </ul>
+        </div>
+        <div class="forget-password" ng-hide="sc.state.isSignUping">
+          <a ng-click="sc.switchToForgetPassword()" class="forget-password-link">forget password</a>
+          <span class="create-account" ng-click="sc.switchToSignUp()">Create New Account</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ng-cloak fixed-block mmx-top-layer" id="id-login-panel"
+       ng-show="sc.state.editorMode === sc.EDITOR_MODE.LOGIN && sc.state.isForgetPassword == true">
+    <header class="mmx-header-default mmx-header-fixed" style="background-color: #eee">
+      <button class="ion-ios-arrow-back icon-button" ng-click="sc.closeLoginPanel()"></button>
+      <div class="mmx-header-center mmx-header-center-clear">
+        <div class="mmx-header-center-logo-forget">
+          <div class="" ng-show="sc.state.forgetPassword === sc.FORGET_PASSWORD.EMAIL_OR_PHONE">{{sc.getStr("Input-Email-Phone")}}</div>
+          <div class="" ng-show="sc.state.forgetPassword === sc.FORGET_PASSWORD.CODE">{{sc.getStr("Input-Code")}}</div>
+          <div class="" ng-show="sc.state.forgetPassword === sc.FORGET_PASSWORD.UPDATE">{{sc.getStr("Update-password")}}</div>
+        </div>
+      </div>
+    </header>
+    <div class="model-login login">
+      <div id="id-login-form">
+        <div class="weui-cells weui-cells_form">
+          <div class="weui-cell weui-cell_warn user-id" ng-show="sc.state.forgetPassword === sc.FORGET_PASSWORD.EMAIL_OR_PHONE">
+            <div>
+              <span>{{sc.getStr("User-name")}}</span>
+            </div>
+            <div class="weui-cell__bd">
+              <input tabindex="1" type="text" class="weui-input font-login-normal" value="weui input error"
+                     ng-model="sc.userName" placeholder={{sc.getStr("email-phone-format")}}>
+              <!-- <label class="login-tips" ng-show="sc.state.isSignUping && (!sc.userName || sc.userName.length <8) && (sc.loginActiveField===2)">
+                {{sc.getStr("8+-characters-and-numbers")}}</label> -->
+            </div>
+            <div class="weui-cell__ft">
+              <i class="weui-icon-warn"></i>
+            </div>
+          </div>
+          <label class="color-warn font-login-normal" ng-show="sc.user.nameError && sc.state.forgetPassword === sc.FORGET_PASSWORD.EMAIL_OR_PHONE">
+            {{sc.getStr("Please-input-correct-name")}}
+          </label>
+
+          <div class="weui-cell weui-cell_warn user-id" ng-show="sc.state.forgetPassword === sc.FORGET_PASSWORD.CODE">
+            <div>
+              <span>{{sc.getStr("Input-Code")}}</span>
+            </div>
+            <div class="weui-cell__bd">
+              <input tabindex="2" class="weui-input font-login-normal"
+                     value="weui input error" ng-model="sc.code"
+                     placeholder={{sc.getStr("Input-your-code")}}>
+            </div>
+            <div class="weui-cell__ft" ng-show="sc.codeError">
+              <i class="weui-icon-warn"></i>
+            </div>
+          </div>
+          <label class="color-warn font-login-normal" ng-show="sc.codeError && sc.state.forgetPassword === sc.FORGET_PASSWORD.CODE">
+            {{sc.getStr("Incorrect-code")}}
+          </label>
+
+          <div class="weui-cell weui-cell_warn user-id" ng-show="sc.state.forgetPassword === sc.FORGET_PASSWORD.UPDATE">
+            <div>
+              <span>{{sc.getStr("Password")}}</span>
+            </div>
+            <div class="weui-cell__bd">
+              <input tabindex="2" class="weui-input font-login-normal" type="password"
+                     value="weui input error"
+                     ng-model="sc.userPsw" placeholder={{sc.getStr("password-placeholder")}}>
+            </div>
+            <div class="weui-cell__ft" ng-show="sc.user.passwordError">
+              <i class="weui-icon-warn"></i>
+            </div>
+          </div>
+          <div class="weui-cell weui-cell_warn user-id" ng-show="sc.state.forgetPassword === sc.FORGET_PASSWORD.UPDATE">
+            <div>
+              <span>{{sc.getStr("Confirm-password")}}</span>
+            </div>
+            <div class="weui-cell__bd">
+              <input tabindex="3" class="weui-input font-login-normal" type="password"
+                     value="weui input error" ng-model="sc.userPswConfirm"
+                     placeholder={{sc.getStr("confirm-password")}}>
+            </div>
+            <div class="weui-cell__ft" ng-show="sc.user.passwordError">
+              <i class="weui-icon-warn"></i>
+            </div>
+          </div>
+          <label class="color-warn font-login-normal" ng-show="sc.pswNotMatch && sc.state.forgetPassword === sc.FORGET_PASSWORD.UPDATE">
+            {{sc.getStr("Password-not-match")}}
+          </label>
+          <label class="color-warn font-login-normal" ng-show="sc.updatePswError && sc.state.forgetPassword === sc.FORGET_PASSWORD.UPDATE">
+            {{sc.getStr("Not-updated-password")}}
+          </label>
+        </div>
+        <div class="weui-btn-area">
+          <button tabindex="4" class="button font-login-normal full-div-width loginBtn-true"
+                  ng-show="sc.state.forgetPassword === sc.FORGET_PASSWORD.EMAIL_OR_PHONE" ng-click="sc.switchToCode()">
+            {{sc.getStr("Send-code")}}
+          </button>
+          <button tabindex="" class="button font-login-normal full-div-width loginBtn-true"
+                  ng-show="sc.state.forgetPassword === sc.FORGET_PASSWORD.CODE" ng-click="sc.switchToUpdate()">
+            {{sc.getStr("Confirm-code")}}
+          </button>
+          <button tabindex="5" class="button font-login-normal full-div-width loginBtn-true"
+                  ng-show="sc.state.forgetPassword === sc.FORGET_PASSWORD.UPDATE" ng-click="sc.switchToUpdateDone()">
+            {{sc.getStr("Update-pwd-btn")}}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="share_contain toolbar-layer" id="share_btn"
+       ng-show="!sc.state.isTopicIntro && (((sc.state.editorMode === sc.EDITOR_MODE.PREVIEW) && sc.state.isPreviewMenuOn) || (sc.state.editorMode === sc.EDITOR_MODE.INTERACT)) ">
+    <header class="btn_share">
+      <span class="fl button2-bgc" ng-click="sc.toAddMode()" id="id-icon-back-arrow" ng-show="sc.user.canCT"
+            title={{sc.getStr("Back")}} on-long-press-tooltip=""></span>
+      <span class="fr button2-bgc" ng-click="sc.openMyUdoido()" id="id-icon-home-page"
+            title={{sc.getStr("My-space")}} on-long-press-tooltip=""></span>
+    </header>
+    <section class="let-me-try">
+      <button ng-click="sc.cloneIt($event)" ng-show="sc.wcyState.isPlayOnly" class="one-block">
+        改它?
+      </button>
+      <button ng-click="sc.selectCanvas()" ng-show="sc.wcyState.isPlayOnly" class="one-block">我也做一个!</button>
+    </section>
+    <section class="icons_share">
+      <ul>
+        <li ng-click="sc.toAddMode()" id="id-icon-edit" ng-show="sc.canEdit()" class="button2-bgc"
+            title={{sc.getStr("Edit")}} on-long-press-tooltip=""></li>
+        <li ng-click="sc.toSoundRecordingMode()" id="id-icon-voice-record" ng-show="sc.canEdit()"
+            class="button2-bgc"
+            title={{sc.getStr("Dub")}} on-long-press-tooltip=""></li>
+        <li class="button2-bgc" id="id-icon-animation" ng-show="sc.canEdit() && sc.IN_DEV"
+            ng-click="sc.interact()"></li>
+        <li class="button2-bgc" id="id-icon-new" ng-show="sc.canEdit()" ng-click="sc.createNewOpus()"
+            title={{sc.getStr("new")}} on-long-press-tooltip=""></li>
+        <li class="button2-bgc" id="id-icon-clone" ng-click="sc.cloneIt($event)" ng-hide="sc.wcyState.isPlayOnly || !sc.canEdit()"
+            title={{sc.getStr("Clone")}} on-long-press-tooltip=""></li>
+        <li ng-click="sc.uploadScreenShotManually()" ng-hide="!sc.user.canCT || sc.wcyState.isPlayOnly || !sc.canEdit()"
+            id="id-icon-camera" class="button2-bgc"
+            title={{sc.getStr("Update-cover")}} on-long-press-tooltip=""></li>
+        <li ng-click="sc.convertToTopic()" id="id-icon-convert-to-topic" title={{sc.getStr("Convert-to-topic")}}
+            class="button2-bgc"
+            ng-show="sc.user.canCT && sc.canEdit()" on-long-press-tooltip=""></li>
+        <li ng-click="sc.saveAsIComponent()" id="id-icon-2-component"
+            title={{sc.getStr("Reusable-object")}}
+            class="button2-bgc"
+            ng-show="sc.user.canCT && sc.canEdit()" on-long-press-tooltip=""></li>
+        <li id="id-icon-share-bg"
+            title={{sc.getStr("Share")}}
+            ng-click="sc.openSharePanel()" class="button2-bgc"
+            ng-show="sc.canEdit() && sc.IN_DEV" on-long-press-tooltip=""></li>
+        <li id="id-icon-replay" title={{sc.getStr("Replay")}} ng-click="sc.replayInActionBoard()"
+            class="button2-bgc" on-long-press-tooltip=""></li>
+      </ul>
+    </section>
+  </div>
+  <div class="first_page" id="id-first-page" ng-show="sc.state.editorMode === sc.EDITOR_MODE.FIRST">
+    <header class="mmx_header">
+      <!-- <i class="iconfont icon-huodong2" style="font-size: 1rem;" ng-click="sc.openTopicPage()"></i> -->
+      <div class="my_ac fl" ng-click="sc.openListView()"></div>
+      <div class="my_mmx fr" ng-click="sc.openMyUdoido($event)"></div>
+    </header>
+    <section>
+      <div class="radio_mmx" ng-show="sc.IN_DEV">
+        <i class="rideo_icon fl ml2">
+          <img src="img/rideo_icon.png">
+        </i>
+        <div class="scroll-box fl ml2">
+          <ul>
+            <li>UDOIDO in TESL 2022</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+    <section>
+      <div class="edit_btn">
+        <div class="edit_btn_icon" ng-click="sc.freeCreate()">
+        </div>
+      </div>
+    </section>
+    <section>
+      <div class="mmx_works">
+        <button ng-click="sc.onTodayTopicPane($event)" ng-class="">{{sc.getStr("Activity-today")}}</button>
+        <button ng-click="sc.onFineOpusPane($event)">{{sc.getStr("Latest-Opus")}}</button>
+        <button ng-click="sc.openAllOpusPane($event)" ng-show="sc.user.canRefine">{{sc.getStr("All-Opus")}}</button>
+        <div class="mmx_works_list_con">
+          <ul class="mmx_works_list" ng-style="sc.opusThumbListStyle">
+            <li ng-repeat="opus in sc.opusList" ng-click="sc.openGoodOpus(opus)" ng-style="sc.opusThumbStyle" ng-hide="!opus">
+              <img ng-src="{{opus.thumbPath}}" alt="{{opus._id}}">
+              <div class="mmx_works_news">
+                <div class="mmx_works_news_con">
+                  <span class="fl text_mmx_work white">{{opus.title}}</span>
+                </div>
+                <div class="mmx_works_news_name">
+                  <span class="fl name_mmx_work white">
+                    <span>{{opus.authorName}}</span>
+                    <span ng-hide="sc.TEMP_HIDE">{{opus.userAge}}岁</span>
+                  </span>
+                  <span class="fr name_mmx_number" ng-hide="sc.TEMP_HIDE">
+                    <i class="mmx_collection_icon"></i>
+                    <span class="white">{{opus.score}}</span>
+                  </span>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </div>
+  <div class="information_write content-layer" ng-show="sc.state.topicPage === sc.TOPIC_PAGE.EDIT">
+    <table>
+      <tbody>
+        <tr>
+          <td colspan="4" style="text-align: center;">创建主题</td>
+        </tr>
+        <tr>
+          <td>主题名称</td>
+          <td colspan="3"><input type="text" placeholder="请输入主题" ng-model="sc.state.topic.title"></td>
+        </tr>
+        <tr>
+          <td>故事描述</td>
+          <td colspan="3"><input placeholder="请输入故事简介" ng-model="sc.state.topic.description"></input></td>
+        </tr>
+        <tr>
+          <td>情景导入</td>
+          <td colspan="3">
+            <input placeholder="情景导入的url" ng-model="sc.state.topic.introUrl"></input>
+          </td>
+        </tr>
+        <tr ng-hide="sc.TEMP_HIDE">
+          <td>结果奖励</td>
+          <td colspan="3">
+            <input placeholder="结果奖励的url" ng-model="sc.state.topic.outroUrl"></input>
+          </td>
+        </tr>
+        <tr>
+          <td>招贴画</td>
+          <td colspan="3">
+            <textarea ng-hide="sc.TEMP_HIDE" placeholder="招贴画的url"
+                      ng-model="sc.state.topic.posterPictureUrl"></textarea>
+            <img ng-src="{{sc.state.topic.posterPictureUrl}}" />
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="addTopicBtn" ng-click="sc.onCreateTopic()">保存<i class="iconfont icon-tijiao2"></i></div>
+    <div class="addTopicBtn" ng-click="sc.onCancelCreateTopic()">取消</div>
+  </div>
+
+  <div class="information_write content-layer" ng-show="sc.state.topicPage === sc.TOPIC_PAGE.DETAIL">
+    <table>
+      <tbody>
+        <tr>
+          <td colspan="4" style="text-align: center;">
+            {{sc.state.topic.title}}
+            <button ng-click="sc.joinTopic(sc.state.topic)">参加</button>
+            <button ng-click="sc.openTopicPage()">换一个</button>
+            <button ng-click="sc.openAddTopicPage(sc.state.topic)">编辑</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div ng-hide="sc.TEMP_HIDE" class="information_introduce">
+      <div class="fl introduce_title">
+        发起老师
+      </div>
+      <div class="introduce_title_con fl">
+        {{sc.state.topic.authorName}}
+      </div>
+    </div>
+    <div ng-hide="sc.TEMP_HIDE" class="information_introduce">
+      <div class="fl introduce_title">
+        学校
+      </div>
+      <div class="introduce_title_con fl">
+        {{sc.state.topic.school}}
+      </div>
+    </div>
+    <div class="information_introduce">
+      <div class="fl introduce_title">
+        故事描述
+      </div>
+      <div class="introduce_title_con fl">
+        {{sc.state.topic.description}}
+      </div>
+    </div>
+    <img ng-src="{{sc.state.topic.thumbPath}}"
+         ng-click="sc.openTopicIntro(sc.state.topic)">
+  </div>
+
+  <section class="information_write content-layer" style="padding: 0"
+           ng-show="sc.state.topicPage === sc.TOPIC_PAGE.LIST"
+           on-swipe-left="sc.nextPageOpus($event)" on-swipe-right="sc.prevPageOpus($event)">
+    <span class="toolbox-close-btn-layer win-close-btn-div">
+      <button class="ion-plus-circled text-button remove-button-appearance" ng-hide="sc.TEMP_HIDE"
+              ng-click="sc.openAddTopicPage()" title={{sc.getStr("addTopic")}} on-long-press-tooltip=""></button>
+      <button class="ion-close-circled text-button remove-button-appearance"
+              ng-click="sc.closeTopicPage()" title={{sc.getStr("Cancel")}} on-long-press-tooltip=""></button>
+    </span>
+
+    <table>
+      <tbody>
+        <tr>
+          <td colspan="4" style="text-align: center;">
+            活动列表
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="mmx-list-product-float-item">
+      <a href="javascript:;" class="mmx-list-product-fl-item"
+         ng-repeat="prop in sc.opusList" ng-click="sc.openGoodOpus(prop)">
+        <div class="mmx-list-product-fl-img">
+          <img ng-src={{prop.thumbPath}}>
+        </div>
+        <div class="mmx-list-product-fl-text">
+          <h3 ng-hide="prop.isBanned" class="mmx-list-product-fl-title">名称：&nbsp;&nbsp;{{prop.title}}</h3>
+          <h3 ng-show="prop.isBanned" class="mmx-list-product-fl-title">名称：&nbsp;&nbsp;!!!已禁用!!!</h3>
+          <h3 class="mmx-list-product-fl-title">作者：&nbsp;&nbsp;{{prop.authorName}}</h3>
+          <h3 ng-show="sc.IN_DEV" class="mmx-list-product-fl-title">主办：&nbsp;&nbsp;{{prop.school}}</h3>
+          <h3 ng-show="sc.IN_DEV" class="mmx-list-product-fl-title">简介：&nbsp;&nbsp;{{prop.description}}</h3>
+          <h3 ng-show="sc.IN_DEV" class="mmx-list-product-fl-title">时间：{{prop.timestamp}}</h3>
+        </div>
+      </a>
+    </div>
+  </section>
+  <div id="id-level-navigator" class="ng-cloak toolbar-layer"
+       ng-show="sc.isRecordingAudioMode()">
+    <button title={{sc.getStr("previous-level")}}
+            ng-click="sc.inspectPrevLevel();" id="id-icon-left-arrow" class="button2-bgc" on-long-press-tooltip="">
+    </button>
+    <button title={{sc.getStr("next-level")}}
+            ng-click="sc.inspectNextLevel();" id="id-icon-right-arrow" class="button2-bgc" on-long-press-tooltip="">
+    </button>
+  </div>
+
+  <div id="id-text-editor-div" class="mmx-popup-layer" ng-show="sc.textEditor.opened">
+    <div class="input_text">
+      <div class="enterText">
+        <input type="text" ng-model="sc.textEditor.content" ng-style="sc.textEditor.cssFontStyle"
+               onpaste="sc.onPaste(evt)"
+               id="id-text-area" class="enterTextInput" placeholder={{sc.getStr("Input-text")}}>
+      </div>
+      <div>
+        <button ng-show="sc.state.canCopyPaste" class="btn-fit-content" ng-click="sc.textSelectAll()">
+          {{sc.getStr("Select-all")}}
+        </button>
+        <button ng-show="sc.state.canCopyPaste" class="btn-fit-content" ng-click="sc.textCopy()">
+          {{sc.getStr("Copy")}}
+        </button>
+        <button ng-show="sc.state.canCopyPaste" class="btn-fit-content" ng-click="sc.textPaste()">
+          {{sc.getStr("Paste")}}
+        </button>
+        <button ng-show="sc.state.canCopyPaste" class="btn-fit-content" ng-click="sc.textCut()">
+          {{sc.getStr("Cut")}}
+        </button>
+        <button class="btn-fit-content float-right" ng-click="sc.onTextEditorOK()">
+          {{sc.getStr("OK")}}
+        </button>
+      </div>
+
+    </div>
+    <div id="id-font-size-slider" class="toolbar-layer rzsliderSlider">
+      <rzslider data-rz-slider-model="sc.textEditor.fontSize"
+                data-rz-slider-options="sc.textEditor.fontSizeOptions">
+      </rzslider>
+      <div class="textColor">
+        <ul>
+          <li ng-repeat="color in sc.textEditor.colors" ng-click="sc.onSelectColor($index)"
+              style="background-color: {{color}}"></li>
+        </ul>
+      </div>
+      <div class="textFunction" ng-hide="sc.TEMP_HIDE">
+        <ul>
+          <li><i class="iconfont icon-zitiyinying"></i>阴影</li>
+          <li>居中</li>
+          <li>加粗</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div id="clip-div" class="toolbar-layer" style="display: none; position: absolute; width:100%; height: 100%">
+    <canvas id="clipCanvas" width="100%" height="100%" style="background: whitesmoke;"></canvas>
+    <span class="toolbox-close-btn-layer top-right-align">
+      <span ng-show="sc.clipMask">
+        <button ng-show="sc.IN_DEV" class="button2-bgc" ng-click="sc.clip.setMask(1);"
+                title={{sc.getStr("Skip")}} on-long-press-tooltip="">
+          {{sc.getStr("Circle")}}
+        </button>
+        <button ng-show="sc.IN_DEV" class="button2-bgc" ng-click="sc.clip.setMask(2);"
+                title={{sc.getStr("Skip")}} on-long-press-tooltip="">
+          {{sc.getStr("Cube")}}
+        </button>
+        <button id="id-icon-back-arrow" class="button2-bgc" ng-click="sc.turnOffClip();"
+                title={{sc.getStr("Back")}} on-long-press-tooltip=""></button>
+      </span>
+      <button ng-hide="sc.clipMask" class="button2-bgc" ng-click="sc.turnOnClip();"
+              title={{sc.getStr("Clip")}} on-long-press-tooltip="">
+        {{sc.getStr("Clip")}}
+      </button>
+      <button id="id-icon-ok-bg" class="button2-bgc" ng-click="sc.confirmClip();"
+              title={{sc.getStr("OK")}} on-long-press-tooltip=""></button>
+      <button id="id-icon-close-bg" class="button2-bgc" ng-click="sc.cancelClip()"
+              title={{sc.getStr("Cancel")}} on-long-press-tooltip=""></button>
+    </span>
+  </div>
+
+  <div class="ng-cloak settings toolbar-layer" id="id-share-panel" style="display: none;">
+    <span class="toolbox-close-btn-layer right-align">
+      <button id="id-icon-ok-bg" class="button2-bgc"
+              ng-click="sc.applyShareData(); sc.closeSharePanel();" title={{sc.getStr("OK")}} on-long-press-tooltip=""></button>
+      <button ng-hide="sc.TEMP_HIDE" id="id-icon-close-bg" class="button2-bgc"
+              ng-click="sc.closeSharePanel()()" title={{sc.getStr("Cancel")}} on-long-press-tooltip=""></button>
+    </span>
+    <div class="dlg-title"><strong>{{sc.getStr("Share")}}</strong></div>
+    <input ng-hide="sc.TEMP_HIDE" id="id-opus-url" value="{{sc.opusUrl}}" class="visible-out-screen">
+    <input ng-hide="sc.TEMP_HIDE" id="id-embed-codes" value="{{sc.embedCodes}}" class="visible-out-screen">
+
+    <div>
+      <label class="dlg-content-text">{{sc.getStr("Title")}}:</label>
+      <textarea tabindex="1" type="text" class="text-editor-div dlg-content-text silver-border-thin"
+                ng-model="sc.opusShareData.title" placeholder={{sc.getStr("title-of-the-message")}}></textarea>
+    </div>
+    <div ng-hide="sc.TEMP_HIDE">
+      <label class="dlg-content-text">{{sc.getStr("Content")}}:</label>
+      <textarea tabindex="2" type="text" class="text-editor-div dlg-content-text silver-border-thin"
+                ng-model="sc.opusShareData.description"
+                placeholder={{sc.getStr("content-of-the-message")}}></textarea>
+    </div>
+
+    <div class="settings-button" ng-hide="sc.TEMP_HIDE">
+      <button ng-click="sc.copyEmbedCodes()" class="dialog-button-2">{{sc.getStr("Embed-to-website")}}</button>
+      <button ng-click="sc.copyOpusUrl()" class="dialog-button-2">{{sc.getStr("Copy-link")}}</button>
+      <button ng-click="sc.state.shareToFbChecked = true; sc.confirmShare()"
+              class="dialog-button-2 dialog-button-primary-2 ion-social-facebook"></button>
+    </div>
+    <div ng-hide="sc.readyToShare" class="dlg-content-text">正在打包上传。。。</div>
+    <div ng-show="sc.readyToShare" class="dlg-content-text">正在打包上传。。。完成！</div>
+    <div ng-show="sc.readyToShare" class="dlg-content-text">点击右上角的微信分享按钮</div>
+  </div>
+
+  <div id="id-overlay" ng-show="sc.isOverlayOn();"></div>
+  <div id="id-start-to-play" class="toolbar-layer center-xy ion-ios-play"
+       ng-show="sc.showStartToPlay"
+       ng-click="sc.preview()"></div>
+</ion-view>

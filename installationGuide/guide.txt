@@ -1,0 +1,21 @@
+必须建立相应的目录（在安装逻辑盘上）
+E: (安装所在的磁盘）
+   \data\wcydepot： 作品数据
+		   \wwwz        证书
+
+
+db服务器（用自己的， 不需要用atlas, 额外设置太多）： 
+https://cloud.mongodb.com/v2/61ef655eb5169c4b506eb913#setup/access?includeToast=true
+要预先添加IP地址，否则无法访问数据库
+
+(Test中的所有文件）
+
+数据库： 如何初始化？
+   ? 自动的脚本？
+   ? 提前导出来的数据？
+   
+		   
+		   
+2017.1.7： mongoDb漏洞修改
+https://help.aliyun.com/knowledge_detail/37451.htmlyij
+	

@@ -1,0 +1,67 @@
+如何设置google clound的后台服务器（除了数据库）
+
+登录： cloud.google.com，     console
+或 直接 https://console.cloud.google.com/
+
+ssh andrew (无需口令， key已经配置好了）
+安装数据库MongoDB
+WinScp复制后台和前台
+npm 安装后台的node模块
+建立以下目录：
+** 数据库和wcy文件的目录
+** 建立cert文件的目录
+** logs
+
+启动数据服务器，
+启动web服务器（前后台）
+
+
+解析域名到 此IP： IP配置
+
+购买SSL证书
+配置SSL证书
+
+
+用 Node Express测试
+
+
+
+启动db服务器： 
+sudo nohup mongod --auth --dbpath /var/lib/mongodb/ --bind_ip=127.0.0.1 --port=57098&
+
+启动web服务器（前后台）
+cd /data/wwwz/card2/backOffice
+node ./bin/server.js
+
+
+客户端：  
+mongosh mongodb://127.0.0.1:57098/nnnn -u webreaderw\!981  -p
+
+	
+IP： 34.130.222.44
+
+* Node 14.x
+
+curl -fsSL https://deb.nodesource.com/setup_14.x | sudo -E bash -
+sudo apt-get install -y nodejs
+(缺省是14.18.3版本Node)
+
+from : https://github.com/nodesource/distributions/blob/master/README.md
+
+* upgrade npm (缺省是6.14.15)
+sudo npm i -g npm-upgrade
+
+* upload udoido 
+backoffice  => /eplan/backoffice (XXX: node_modules)
+www         => /eplan/www
+data        => /data             必须建立相应的目录（在相同的逻辑盘上）
+               /data/wcydepot： 作品数据 (XXX: wycdepot\*.wcy) 
+		       /data/wwwz       证书
+
+* Confirm www setting are OK:
+1) sudo node test/test-www-settings.js
+2) open the <server IP> in browser, showing:
+      
+      web setting are OK!
+
+* 

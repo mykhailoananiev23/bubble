@@ -1,0 +1,202 @@
+<ion-view id="id-view" scroll="false" view-title="UDOIDO ANIMATION" ng-controller="sceneController as sc" ng-cloak>
+	<div class="ng-cloak scene_content" ng-show="sc.state.editorMode >= 2000">
+		<div class="scene_content_1">
+			<canvas id="testCanvas" class="pt-perspective content-layer canvas-con" ng-style="sc.EditorService.canvasStyle"
+			        ng-show="sc.state.readyToShow"></canvas>
+			<div id="id-page-effect1" class="pt-perspective page-effect-layer " ng-style="sc.EditorService.canvasStyle"
+			     ng-show="sc.pteState.page1On">
+				<img ng-src={{sc.pteState.page1Image}}>
+			</div>
+		</div>
+	</div>
+	<script id="imagePane__html" type="text/ng-template">
+		<ion-modal-view>
+			<ion-content id="mat-pane-div" on-swipe-up="sc.nextPage($event)" on-swipe-down="sc.prevPage($event)">
+				<div class="panel-top-bar cang_jing">
+					<div class="dao_ju_icon">
+						<ul style="height: 1.2rem;">
+							<li class="xing active"><img src="img/changjing/changjing1.png"></li>
+							<li title="insert image from my computer or phone" ng-hide="sc.isMusic" id="id-insert-from-local"
+							    ng-click="sc.insertFromLocal(true)" class="xiang"><img src="img/changjing/changjing2.png"></li>
+							<li title="" ng-show="sc.isMusic" id="id-rideo" ng-click="sc.insertFromLocal(true)" class="mike"><img
+								src="img/maik_icon.png"></li>
+							<li title="" ng-show="sc.isMusic" id="id-music-local" ng-click="sc.insertFromLocal(false)" class="mike">
+								<img src="img/yinyue.png"></li>
+							<li class="ce" ng-hide="sc.isMusic" ng-click="sc.insertFromLocal(false)"><img
+								src="img/changjing/changjing3.png"></li>
+							<li class="fu" ng-show="sc.isBackground" ng-click="sc.duplicateCurrentLevel()"><img
+								src="img/changjing/changjing4.png"></li>
+							<li class="kong" ng-show="sc.isBackground" id='id-add-level' title={{sc.getStr("add-scene")}}
+							    ng-click="sc.addLevel($event);"><img src="img/changjing/changjing5.png"></li>
+						</ul>
+					</div>
+					<div class="chang_jing_img" type="item-text-wrap" ng-hide="sc.isMusic">
+						<ul class="chang_jing_img_list">
+							<li ng-click="sc.pickProp(prop)" ng-show="!!prop || !!prop.thumbPath" ng-repeat="prop in sc.props">
+								<div class="chang_jign_icon active">
+									<img ng-hide="sc.isMusic" ng-src="{{prop.thumbPath}}" alt="{{prop.wcyId}}">
+								</div>
+								<div ng-show="sc.isMusic">{{prop.name}}</div>
+								<div class="s1" ng-show="prop.selected"><img src="img/accept_right.png" width="40">
+								</div>
+							</li>
+						</ul>
+					</div>
+					<div class="mmx_music" type="item-text-wrap" ng-show="sc.isMusic">
+						<ul class="mmx_music_list">
+							<li ng-class="sc.getTryingMusicStyle(prop)" ng-repeat="prop in sc.props" ng-click="sc.onTryMusic(prop)">
+								<div ng-show="sc.isTryingMusic(prop)" class="music_use_btn" ng-click="sc.onApplyMusic(prop)">使用</div>
+								<span ng-show="sc.isTryingMusic(prop)" class="bo_img">
+                                        <img src="img/changjing/yinyue_bo.png">
+                                    </span>
+								<p>
+									<span class="music_name">{{prop.name}}</span>
+									<span class="free_btn">
+                                            <img src="img/play.png" ng-hide="sc.isTryingMusic(prop)">
+                                            <img src="img/zanting.png" ng-show="sc.isTryingMusic(prop)"
+                                                 ng-click="sc.onStopTryMusic()">
+                                        </span>
+								</p>
+								<p>01:00</p>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</ion-content>
+		</ion-modal-view>
+	</script>
+
+	<div class="ng-cloak fixed-block mmx-top-layer" id="id-login-panel" style="display: none;">
+		<div class="model-login">
+			<div id="id-login-form">
+				<div class="weui-cells weui-cells_form">
+					<div class="weui-cell weui-cell_warn" ng-click="sc.loginActiveField = 2">
+						<div class="weui-cell__bd">
+							<!--<img src="img/login/zhuanghu.png" style="width: 35px;float: left;border: 1px solid #2269d4;border-radius: 50%;">
+							-->
+							<div class="ion-ios-personadd-outline login-account" style="font-size: 25px"></div>
+							<input tabindex="2" type="text" class="weui-input font-login-normal" value="weui input error"
+							       ng-model="sc.userName" placeholder={{sc.getStr("your-email-address-or-phone")}}>
+							<label class="login-tips"
+							       ng-show="sc.state.isSignUping && (!sc.userName || sc.userName.length <8) && (sc.loginActiveField===2)">
+								{{sc.getStr("8+-characters-and-numbers")}}</label>
+						</div>
+						<div class="weui-cell__ft" ng-show="sc.user.nameError">
+							<i class="weui-icon-warn"></i>
+						</div>
+					</div>
+					<label class="weui-cell_warn font-login-normal" ng-show="sc.user.nameError">
+						{{sc.getStr("it's-invalid-or-already-taken")}}</label>
+
+					<div class="weui-cell weui-cell_warn" ng-click="sc.loginActiveField = 3">
+						<div class="weui-cell__bd">
+							<!-- <img src="img/login/password.png" style="width: 35px;float: left;border: 1px solid #2269d4;border-radius: 50%;">
+							 -->
+							<div class="ion-ios-locked-outline login-account"></div>
+							<input tabindex="3" class="weui-input font-login-normal" type="password" value="weui input error"
+							       ng-model="sc.userPsw" placeholder={{sc.getStr("password")}}>
+							<label class="login-tips"
+							       ng-show="sc.state.isSignUping && (!sc.userPsw || sc.userPsw.length <8) && (sc.loginActiveField===3)">
+								{{sc.getStr("8+-characters-and-numbers")}}</label>
+						</div>
+						<div class="weui-cell__ft" ng-show="sc.user.passwordError">
+							<i class="weui-icon-warn"></i>
+						</div>
+					</div>
+				</div>
+				<label class="weui-cell_warn font-login-normal" ng-show="sc.user.passwordError">
+					{{sc.getStr("invalid-user-name-or-password")}}</label>
+
+				<div class="weui-btn-area">
+					<button tabindex="4" class="button button-positive font-login-normal full-div-width"
+					        ng-show="!sc.state.isSignUping"
+					        ng-click="sc.signUpOrLogin($event)">{{sc.getStr("Sign-in")}}
+					</button>
+					<button tabindex="4" class="button font-login-normal full-div-width button-signUp"
+					        ng-click="sc.switchToSignUp()"
+					        ng-show="!sc.state.isSignUping">{{sc.getStr("Sign-up")}}
+					</button>
+					<button tabindex="5" class="button button-positive font-login-normal full-div-width"
+					        ng-show="sc.state.isSignUping"
+					        ng-click="sc.signUpOrLogin($event)">{{sc.getStr("Sign-up-for-UDOIDO")}}
+					</button>
+					<button style="margin: 10px 0 10px 0;" tabindex="8"
+					        class="button button-positive font-login-normal full-div-width" ng-click="sc.switchToLogin()"
+					        ng-show="sc.state.isSignUping">{{sc.getStr("Login")}}
+					</button>
+
+				</div>
+				<label class="weui-agree" ng-show="false && sc.state.isSignUping">
+					<input tabindex="5" type="checkbox">
+					<span class="weui-agree__text">
+                            {{sc.getStr("By-clicking")}} {{sc.getStr("Sign-up-for-UDOIDO")}}, {{sc.getStr("you agree")}}
+                            <a href="">{{sc.getStr("our terms of service")}}</a>
+                            and <a href="">{{sc.getStr("privacy policy")}}</a>. {{sc.getStr("We’ll occasionally send you account related emails")}}.
+                        </span>
+				</label>
+
+				<div ng-show="!sc.state.isSignUping" class="sign-up-password">
+					<div href="" class="font-login-normal keepPass" style="background-color: white; border: none">
+						{{sc.getStr("Forget-password")}} <span class="ion-ios-help-outline"
+						                                       style="font-size: 27px; color: #2269d4;display: inline-block;vertical-align: middle;"></span>
+					</div>
+				</div>
+				<div ng-hide="sc.NEED_POLISH" class="sign-in-with">
+					<div class="sign-in-l">{{sc.getStr("Sign-in-with")}}</div>
+					<ul>
+						<li ng-click="sc.authenticate('facebook')" class="ion-social-facebook"></li>
+						<li ng-click="sc.authenticate('twitter')" class="ion-social-twitter"></li>
+						<li ng-click="sc.authenticate('google')" class="ion-social-googleplus-outline" style="margin-right: 0"></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="first_page" id="id-first-page">
+		<div>
+			<button ng-click="sc.openTopicPane($event)">主题</button>
+			<button ng-click="sc.openFineOpusPane($event)">优秀作品</button>
+			<button ng-click="sc.openAllOpusPane($event)">已发表作品</button>
+			<button ng-click="sc.openMyOpusPane($event)" ng-show="sc.user.canAdmin">全部作品</button>
+			<button ng-click="sc.openMyOpusPane($event)" ng-hide="sc.user.canAdmin">我的作品</button>
+			<button ng-click="sc.openBkgPane($event)">背景</button>
+			<button ng-click="sc.openPropPane($event)">道具</button>
+			<button ng-click="sc.openPeoplePane($event)">人物</button>
+			<button ng-click="sc.openMusicPane($event)">声音</button>
+			<button ng-click="sc.logout($event)">退出</button>
+
+		</div>
+		<div>
+			<button ng-click="sc.onBan($event)">删除。禁止</button>
+			<button ng-click="sc.onPublish($event)">发布。共享</button>
+			<button ng-click="sc.onRefine($event)">推荐</button>
+			<button ng-click="sc.onSelectTopic($event)">当前主题：{{sc.topicInfo}}</button>
+			<button ng-click="sc.onNoTopic($event)">无主题</button>
+			<button ng-click="sc.onAttachTopic($event)" ng-show="!!sc.state.topic">关联主题</button>
+			<button ng-click="sc.onDetachTopic($event)" ng-show="!!sc.state.topic">去关联</button>
+			<button ng-click="sc.onRequestAll($event)">{{sc.requestAllFlag}}全部素材</button>
+			<button ng-click="sc.prevPage($event)">《</button>
+			<button ng-click="sc.nextPage($event)">》</button>
+		</div>
+		<div class="mmx_works">
+			<div class="mmx_works_list_con">
+				<ul class="mmx_works_list">
+					<li ng-repeat="item in sc.dataList" ng-click="sc.pickProp(item)" class="mmx_thumbs_frame">
+						<div class="selected_mark" ng-show="item.selected">
+							<img src="img/accept_right.png" width="40">
+						</div>
+						<img ng-src="{{item.thumbPath}}" alt="{{item.name}}">
+						<div class="mmx_opus_badge">
+									<div ng-hide="sc.NEED_POLISH" class="mmx_opus_badge_tag">{{item.userId}}/{{item.authorName}}</div>
+									<div ng-hide="sc.NEED_POLISH" class="mmx_opus_badge_tag">{{item._id}}/{{item.title}}</div>
+                  <div class="mmx_opus_badge_tag" ng-show="item.isShared">已共享</div>
+                  <div class="mmx_opus_badge_tag" ng-show="item.isBanned">已禁止</div>
+                  <div class="mmx_opus_badge_tag" class="white">{{item.score}}</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</ion-view>

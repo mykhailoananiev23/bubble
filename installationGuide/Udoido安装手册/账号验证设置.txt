@@ -1,0 +1,14 @@
+
+Remote服务器设置： 
+邮件验证用
+  //SMTP
+  MAILTRAP_HOST:'sandbox.smtp.mailtrap.io',
+  MAILTRAP_PORT:'2525',
+  MAILTRAP_USER:'e7754c508b4936',
+  MAILTRAP_PASS: 'fed306890a6c4a',
+
+电话验证用
+  //Phone
+  TWILIO_ACCOUNT_SID: 'AC2e920ea1e04f85da0b0af3ef67e05237',
+  TWILIO_AUTH_TOKEN: 'c5134065ea246ae1cf85084c1a45b013',
+  TWILIO_VERIFY_SID: 'VA0f0b518471fc0bbdd6cfc9f30b08c54a',

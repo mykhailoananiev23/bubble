@@ -1,0 +1,34 @@
+打包的Use Cases：
+
+Cases (Attach): 
+* 小鸟附在树枝上，树枝(有parent)作为根， 小鸟整体作为附件
+* 把狐狸（元件，含Root关节， Joint（）等） 放到汽车上，
+
+
+打包: Attach: (先选择附件）， 点“Attach”按钮，点击“host”物体， 对的。
+
+
+打包：
+  包的直接“根”只有1个， 包的成员则以此直接根为parent。
+
+  选根： 
+  * 第一个hasParent()者，
+  * 关节的Root，
+  * null
+  如果null，则建立新的Group元素
+
+  剔除hasParent的元素，他们不能被直接打入这个包， 
+
+    
+  ==》 包的成员应该没有parent，否则，不能被打包
+  ==》 包的直接“根”，可能有Parent，如：关节的Joint或另外包的成员；
+								也可能没有parent.如：关节Root等
+  
+								
+								
+* 如果有Joint或Root，则以第一个Joint或Root为父，其余的作为子
+  包就是新parent， 如果元素已经有parent，
+
+* 否则（都是普通元素）， 建立一个Group元素
+
+因为：parent只有1个，所以，一个物体只属于1个包，但是，可以层次地属于父、爷。

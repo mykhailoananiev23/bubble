@@ -1,0 +1,54 @@
+
+#welcome {
+    height: 54vmin;
+    width: 90vmin;
+    max-width: 90vmin;
+    text-align: center;
+}
+
+.welcome-text {
+    font-size: 6vmin;
+    min-height: 13vmin;
+}
+
+#welcome-brand {
+    position: fixed;
+    bottom: 6vmin;
+    right: 6vmin;
+}
+
+.center-xy {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: auto;
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -ms-transform: translateX(-50%) translateY(-50%);
+    -o-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+    font-weight: normal;
+}
+
+.center-x-div {
+    position: absolute;
+    left: 50%;
+    margin: auto;
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    -o-transform: translateX(-50%);
+    transform: translateX(-50%);
+    font-weight: normal;
+}
+
+.center-y-div {
+    position: relative;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+    font-weight: normal;
+}

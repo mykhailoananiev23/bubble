@@ -1,0 +1,108 @@
+/* general */
+
+body {
+    font-size: 1rem;
+}
+
+label, input {
+    font-size: 1rem;
+}
+
+
+/* alignment */
+.x-center {
+    text-align: center;
+}
+
+.y-center {
+    vertical-align: middle;
+}
+
+.img-y-center-helper {
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+}
+
+.show-border {
+    border: solid 2px;
+}
+
+/* layout */
+.bottom-bar {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+/* layer */
+
+/* font color, size */
+.header-font {
+    font-size: 2rem;
+    font-weight: bold;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+
+/* title */
+
+#app-title {
+    border: solid 2px;
+    border-radius: 6px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    color: red;
+    font-size: 2rem;
+    font-weight: bolder;
+}
+
+#app-sub-title {
+    color: red;
+    font-size: 1rem;
+    font-weight: bolder;
+}
+
+#app-foot {
+    color: red;
+    font-size: 1rem;
+
+    position: fixed;
+    bottom: 10px;
+    width: 100%;
+}
+
+
+#start-to-fill-div {
+    position: fixed;
+    top: 75%;
+    width: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+#start-to-fill {
+    background-color: royalblue;
+}
+
+#welcome-image-div {
+    height: 60%;      /* equals max image height */
+    width: 90%;
+    border: 1px solid red;
+    white-space: nowrap;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+#welcome-image {
+    height : 90%;
+}
+
+.full-parent {
+    width:100%;
+}

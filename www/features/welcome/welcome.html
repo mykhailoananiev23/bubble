@@ -1,0 +1,22 @@
+<ion-view id="id-welcome-view" scroll="false" view-title="welcome" ng-controller="welcomeController as sc" class="app-page">
+    <div id="id-intro-video-div" ng-show="sc.showIntroFlag">
+        <video id="id-intro-video" class="center-xy" preload="none" ng-click="sc.onClick()">
+            <!--- source src="http://res.cloudinary.com/eplan/raw/upload/v1493206517/o5vhswmataili6bmrps7.mp4" type="video/mp4" --->
+            <source src="http://res.cloudinary.com/eplan/video/upload/v1493252593/MicroAnimationIntro_xt9ff7.mp4"  type="video/mp4">
+            <!-- source src="/img/MicroAnimationIntro.mp4" type="video/mp4" -->
+            Your browser does not support the video tag.
+        </video>
+        <div style="position: absolute; bottom:50%; width:100%; text-align: center">
+            <button class="btn-big ion-ios-play" ng-click="sc.clickToStart()" ng-show="!sc.introStarted || sc.introPaused"></button>
+            <button class="btn-big ion-ios-skipforward" ng-click="sc.onSkipIntro()" ng-show="!sc.introStarted || sc.introPaused"></button>
+            <button class="weui-dialog__btn weui-dialog__btn_default"
+                    ng-show="sc.introVideoCompleted" ng-click="sc.onStart()"> Next
+            </button>
+        </div>
+        <div style="position: absolute; bottom: 5%; left:5%">
+            <input tabindex="6" type="checkbox" class="login-checkbox font-login-normal" ng-model="sc.user.keepMeLogin">
+            <label class="font-login-normal" style="border: none">skip next time
+            </label>
+        </div>
+    </div>
+</ion-view>

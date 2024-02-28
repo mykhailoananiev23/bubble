@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+
+  <!-- 禁止用户缩放 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <meta name="HandheldFriendly" content="true" />
+
+  <!-- 隐藏浏览器的底部和底部菜单 -->
+  <!-- android -->
+  <meta name="mobile-web-app-capable" content="yes">
+
+
+  <!-- iOS -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="translucent-black">
+  <meta name="apple-mobile-web-app-title" content="Animation for you--UDOIDO">
+  <base href="/">
+  <!-- html5mode 消除url中的#所必须的 -->
+  <!--- facebook and std html tags--->
+  <title id="pageTitle">UDOIDO ANIMATION</title>
+  <meta name="description"
+        content="UDOIDO ANIMATION makes it easy and vividly to communicate with client, and generates more leads. You Do, I Do, together we make it better -- UDOIDO" />
+
+  <!-- facebook only -->
+  <meta property="fb:app_id" content="273410813018932" />
+  <meta property="og:site_name" content="UDOIDO" />
+  <meta property="og:title" content="Animation for you -- UDOIDO" />
+  <meta property="og:description"
+        content="UDOIDO -- You Do, I Do, together we make it better. UDOIDO makes it easy to create/share animation in our daily life and work" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="http://www.udoido.com" />
+  <meta property="og:image" content="https://res-3.cloudinary.com/eplan/image/upload/v1496050621/c393.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="319" />
+  <meta property="og:image:height" content="478" />
+  <meta property="og:locale" content="en_US" />
+  <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+  <style>
+    .selected_mark {
+      width: 15px;
+      position: absolute;
+      z-index: 999999;
+      top: 0;
+      left: 0;
+    }
+
+    .mmx_icon {
+      display: flex;
+      display: -webkit-flex;
+      align-items: center;
+    }
+
+      .mmx_icon img {
+        margin: 0 auto;
+        width: 2rem;
+      }
+  </style>
+
+  <script>
+    var TQ = TQ || {};
+    TQ.Env = {
+      lang: "zh" // 'en' //
+    };
+  </script>
+
+  <link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css">
+
+  <!-- basic css, before lazy loading -->
+  <link href="css/styleBasic.css" rel="stylesheet" type="text/css">
+
+
+  <!-- build:css adminAppAll.css -->
+  <link rel="shortcut icon" href="">
+  <link href="lib/ionic/css/ionic.css" rel="stylesheet" type="text/css">
+  <link href="css/animate.css" rel="stylesheet" type="text/css">
+  <link href="lib-debug/wcy3all.css" rel="stylesheet" type="text/css">
+  <link href="lib-debug/select.css" rel="stylesheet" type="text/css">
+  <link href="lib-debug/select2.css" rel="stylesheet" type="text/css">
+  <link href="css/kidsStyle.css" rel="stylesheet" type="text/css">
+  <link href="css/common.css" rel="stylesheet" type="text/css">
+  <link href="css/adminStyle.css" rel="stylesheet" type="text/css">
+  <link href="lib-debug/rzslider.css" rel="stylesheet" type="text/css">
+
+  <link href="css/weui.css" rel="stylesheet" type="text/css">
+
+  <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+  <link href="css/ionic.app.css" rel="stylesheet">
+  -->
+  <!-- endbuild -->
+  <!-- TO-MULTI-HOST-BEGIN -->
+  <script src="/lib/comLibBasic.js"></script>
+  <!-- TO-MULTI-HOST-END -->
+
+  <script src="https://res.cloudinary.com/eplan/raw/upload/webfontloader_kujbhc.js"></script>
+  <script src="https://res-3.cloudinary.com/eplan/raw/upload/ionic.bundle.min_i1cclg.js"></script>
+  <script src="features/common/rem.js"></script>
+
+  <!-- build:js adminAppAll.js -->
+  <!-- 必需先加载的， 要小，否则后续的代码如果先加载完整也无法执行 -->
+  <script src="/lib/ionic/js/angular/angular-cookies.min.js"></script>
+
+  <!-- cordova script (this will be a 404 during development) -->
+  <script src="lib/ng-cordova.min.js"></script>
+  <script src="cordova.js"></script>
+  <script src="lib/ngStorage.min.js"></script>
+
+  <script src="admin/adminMain.js"></script>
+  <script src="lib-debug/libs.js"></script>
+  <script src="lib-debug/select.js"></script>
+  <script src="lib-debug/wcy3all.js"></script>
+  <script src="lib-debug/rzslider.js"></script>
+  <script src="features/utility.js"></script>
+  <script src="features/appConfig.js"></script>
+  <script src="features/welcome/welcomeController.js"></script>
+  <script src="admin/adminViewController.js"></script>
+  <script src="lib-debug/tutor/tutor.js"></script>
+  <script>vex.defaultOptions.className = "vex-theme-os";
+</script>
+  <!-- endbuild -->
+</head>
+<body style="background-color:#eeeeee " class="no-zooming desktop-ok" eventconverter onload="onBodyLoaded()">
+  <base href="/"> <!-- html5mode 消除url中的#所必须的 -->
+  <!--
+    The views will be rendered in the <ion-nav-view> directive below
+    Templates are in the /templates folder (but you could also
+    have templates inline in this html file if you'd like).
+  -->
+  <div ng-cloak="">
+    <ion-nav-view></ion-nav-view>
+  </div>
+
+  <div id="welcome-div" class="mmx_icon">
+    <img src="img/mmx.png">
+  </div>
+
+
+  <!--
+    The nav bar that will be updated as we navigate between views.
+  -->
+  <script>
+    var appStarted = false;
+    function onBodyLoaded() {
+      startApp();
+    }
+
+    function startApp() {
+      if (!appStarted) {
+        TQ.Config.hasFacebook = false;
+        TQ.Config.hasWx = false;
+        appStarted = true;
+        angular.bootstrap(document, ["starter"]);
+        angular.element(document.body).injector().get("WCY").preloadWcy();
+      }
+    }
+  </script>
+</body>
+</html>

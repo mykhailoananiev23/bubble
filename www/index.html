@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+   <!-- this is mykhailo code? -->
+  <link rel="stylesheet" type="text/css" href="css/bubble.css">
+  <!-- 禁止用户缩放 -->
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <meta name="HandheldFriendly" content="true" />
+
+  <!-- 隐藏浏览器的底部和底部菜单 -->
+  <!-- android -->
+  <meta name="mobile-web-app-capable" content="yes">
+
+  <!-- iOS 主屏app设置 -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="translucent-black">
+  <!--- status-bar颜色  content="black" -->
+  <meta name="apple-mobile-web-app-title" content="UDOIDO">
+  <link rel="apple-touch-icon" href="/apple-touch-icon-page.png">
+
+  <base href="/">
+  <!-- html5mode 消除url中的#所必须的 -->
+  <!--- facebook and std html tags--->
+  <title id="pageTitle">UDOIDO</title>
+  <meta name="description"
+    content="UDOIDO ANIMATION makes it easy and vividly to communicate with client, and generates more leads. You Do, I Do, together we make it better -- UDOIDO" />
+
+  <link rel="icon" href="\img\mimixiong.ico">
+  <style>
+    .play-panel {
+      position: absolute;
+      display: block;
+      bottom: 0.5rem;
+      z-index: 200;
+      width: 100%;
+      padding: 0.5rem;
+    }
+
+    #welcome-div {
+      height: 100%;
+      width: 100%;
+      /*  */
+    }
+
+    .mmx_div {
+      display: flex;
+      display: -webkit-flex;
+      align-items: center;
+      position: absolute;
+      transform: translate(50%, -50%);
+      z-index: 100;
+    }
+
+    .hide-it {
+      display: none;
+    }
+
+    /* animation */
+    @keyframes am-welcome {
+      0% {
+        height: 10%;
+        width: 10%;
+        top: 0;
+        right: 0;
+      }
+
+      100% {
+        top: 65%;
+        right: 50%;
+        height: 30%;
+        width: 30%;
+      }
+    }
+
+    @-webkit-keyframes am-welcome {
+      0% {
+        height: 10%;
+        width: 10%;
+        top: 0;
+        right: 0;
+      }
+
+      100% {
+        top: 65%;
+        right: 50%;
+        height: 30%;
+        width: 30%;
+      }
+    }
+
+    .am-welcome {
+      -webkit-animation: am-welcome 3s ease;
+      -moz-animation: am-welcome 3s ease;
+      -ms-animation: am-welcome 3s ease;
+      -o-animation: am-welcome 3s ease;
+      animation: am-welcome 3s ease;
+      -webkit-animation-iteration-count: 1;
+      animation-iteration-count: 1;
+      -webkit-animation-fill-mode: forwards;
+      -moz-animation-fill-mode: forwards;
+      -ms-animation-fill-mode: forwards;
+      -o-animation-fill-mode: forwards;
+      animation-fill-mode: forwards;
+    }
+
+    #id-welcome-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 100;
+    }
+
+    @media (orientation: portrait) {
+      .mmx_div_img {
+        margin: 0 auto;
+        width: 100%;
+      }
+
+      @media (max-width: 599px) and (orientation: portrait) {
+        .welcome-bkg-img {
+          background: url(/img/welcome-bkg-phone.jpg) no-repeat 0 0/100% 100%;
+        }
+      }
+
+      @media (min-width: 600px) and (orientation: portrait) {
+        .welcome-bkg-img {
+          background: url(/img/welcome-bkg-pad.jpg) no-repeat 0 0/100% 100%;
+        }
+      }
+    }
+
+    @media (orientation: landscape) {
+      .mmx_div_img {
+        margin: 0 auto;
+        height: 100%;
+      }
+
+      .welcome-bkg-img {
+        background: url(/img/welcome-bkg-pad.jpg) no-repeat 0 0/100% 100%;
+      }
+
+      @media (min-width: 1024px) and (min-height: 768px) and (orientation: landscape) {
+
+        /* desktop */
+        .desktop-ok {
+          position: absolute;
+          left: 50%;
+          height: 100%;
+          width: 75vh;
+          transform: translate(-50%, 0);
+          overflow-y: hidden;
+        }
+      }
+    }
+  </style>
+
+  <script>
+    var TQ = TQ || {};
+    TQ.Env = {
+      lang: navigator.language // 'zh' //'en' //
+    };
+  </script>
+
+  <link href="css/ionicons.css" rel="stylesheet" type="text/css">
+  <!-- TO-EMBEDED-CSS-BEGIN -->
+  <!-- basic css, before lazy loading -->
+  <link href="css/styleBasic.css" rel="stylesheet" type="text/css">
+  <!-- TO-EMBEDED-CSS-END -->
+  <!-- <link href="//at.alicdn.com/t/font_760449_t7gjw62sv2h.css" rel="stylesheet" type="text/css"> -->
+  <!-- EMBEDED-CSS-HERE -->
+  <!-- TO-LAZY-LOADING-CSS-BEGIN -->
+  <!--- 如果需要命令行调试， 可以打开下面的一行 --->
+  <!---
+    <script src="http://192.168.0.15:8080/target/target-script-min.js#anonymous"></script>
+    --->
+  <!-- build:css wcy3AppAll.css -->
+  <link rel="shortcut icon" href="">
+  <link href="lib/ionic/css/ionic.css" rel="stylesheet" type="text/css">
+  <link href="css/animate.css" rel="stylesheet" type="text/css">
+  <link href="lib-debug/wcy3all.css" rel="stylesheet" type="text/css">
+  <link href="lib-debug/select.css" rel="stylesheet" type="text/css">
+  <link href="lib-debug/select2.css" rel="stylesheet" type="text/css">
+  <link href="css/kidsStyle.css" rel="stylesheet" type="text/css">
+  <link href="css/common.css" rel="stylesheet" type="text/css">
+  <link href="lib-debug/rzslider.css" rel="stylesheet" type="text/css">
+
+  <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+    -->
+  <!-- endbuild -->
+  <!-- TO-LAZY-LOADING-CSS-END -->
+  <!-- TO-MULTI-HOST-BEGIN -->
+  <script src="/lib/comLibBasic.js"></script>
+  <!-- TO-MULTI-HOST-END -->
+
+  <script src="/lib/webfontloader.js"></script>
+  <script src="/lib/ionic/js/ionic.bundle.min.js"></script>
+  <script src="features/common/rem.js"></script>
+
+  <!-- TO-EMBEDED-JS-BEGIN -->
+  <script src="lazyLoading.js"></script>
+  <!-- TO-EMBEDED-JS-END -->
+  <!-- TO-LAZY-LOADING-BEGIN -->
+  <!-- build:js wcy3AppAll.js -->
+  <!-- 必需先加载的， 要小，否则后续的代码如果先加载完整也无法执行 -->
+  <script src="/lib/ionic/js/angular/angular-cookies.min.js"></script>
+
+  <!-- cordova script (this will be a 404 during development) -->
+  <script src="lib/ng-cordova.min.js"></script>
+  <script src="cordova.js"></script>
+  <script src="lib/ngStorage.min.js"></script>
+
+  <script src="lib-debug/angular-long-press.js"></script>
+  <script src="lib-debug/angular-long-press-tooltip.js"></script>
+  <script src="lib-debug/rzslider.js"></script>
+  <script src="lib-debug/select.js"></script>
+  <!-- 以上外来模块优先在main之前-->
+  <script src="features/main.js"></script>
+  <script src="lib-debug/libs.js"></script>
+  <script src="lib-debug/wcy3all.js"></script>
+  <script src="features/utility.js"></script>
+  <script src="features/appConfig.js"></script>
+  <script src="features/welcome/welcomeController.js"></script>
+  <script src="features/convert/convert.js"></script>
+  <script src="features/scene/sceneController.js"></script>
+  <script src="lib-debug/tutor/tutor.js"></script>
+  <script>
+    vex.defaultOptions.className = "vex-theme-os";
+  </script>
+  <!-- endbuild -->
+  <!-- TO-LAZY-LOADING-END -->
+</head>
+
+<body style="background-color:#eeeeee " class="bubble_object no-zooming desktop-ok" eventconverter
+  onload="onBodyLoaded()" oncontextmenu="return false;">
+  <base href="/"> <!-- html5mode 消除url中的#所必须的 -->
+  <!--
+    The views will be rendered in the <ion-nav-view> directive below
+    Templates are in the /templates folder (but you could also
+    have templates inline in this html file if you'd like).
+  -->
+  <!-- /// this is mykhailo code  -->
+  <div>
+    <button onclick="bubble_show();"> show bubble</button>
+   </div>
+   <!-- <? -->
+  <div ng-cloak="">
+    <ion-nav-view></ion-nav-view>
+  </div>
+  <div id="welcome-div" style="display: none" onclick="onWelcomeStart()">
+    <div style="width: 100%; height:100%; ">
+      <img id="id-welcome-bg" class="welcome-bkg-img"></img>
+    </div>
+    <div class="mmx_div hide-it">
+      <img class="mmx_div_img" src="img/mmx-welcome-1.png">
+    </div>
+    <!-- audio id="id-welcome-voice" preload="auto" autoplay>
+      <source src="music/welcome-3.mp3" type="audio/mpeg">
+      Your browser does not support the audio tag.
+    </audio -->
+  </div>
+
+  <!--
+    The nav bar that will be updated as we navigate between views.
+  -->
+  <script>
+    // EMBEDED-JS-HERE
+    var srcList0 = [
+      // LAZY-LOADING-LIST0
+    ];
+    var srcList1 = [
+      // LAZY-LOADING-LIST1
+    ];
+    var srcList2 = [
+      "/img/album.png",
+      "/img/button-smc.png",
+      "/img/button-bgc.png"
+    ];
+    var elementsCached = [];
+    var appIconReadyOrError = false;
+    var appJsReady = false;
+    var appStarted = false;
+    var welcomeStarted = false;
+    var welcomeCompleted = false;
+    var welcomeEle;
+    var i;
+    var numLoaded = 0;
+    var soundOptionsShown = false;
+    var autoPlaySupervisor;
+
+    function initWelcomePage() {
+      if (!TQ.Config.hasWelcome) {
+        welcomeStarted = true;
+        welcomeCompleted = true;
+        return startApp();
+      }
+      welcomeEle = document.getElementById("id-welcome-voice");
+      if (!welcomeEle) {
+        setTimeout(function () {
+          welcomeStarted = true;
+          welcomeCompleted = true;
+          startApp();
+        }, 3000);
+        return startMmxAnimation();
+      }
+      welcomeEle.addEventListener("canplay", onCanPlay);
+      welcomeEle.addEventListener("canplaythrough", onCanPlay);
+      welcomeEle.addEventListener("ended", onWelcomeEnd);
+
+      // 在没有用户的action，autoplay在下列情形下还会自动播放
+      // * 在ipad的主屏版，
+      // * PC版 Ctrl + F5的， （普通的reload 不行）
+
+      // 在mobile web上， 根本不会开始load或preload， 如果没有user的action ==>必须加按钮
+      // welcome 动画的优先级:
+      //  #1： 如果能够自动播audio，则自动开始播放
+      //  #2A：否则，如果用户点击了， 则开始播；
+      //  #2B: 如果超过了3000ms，#1和#2没有开始， 则跳过welcome animation，自动开始app
+      autoPlaySupervisor = setTimeout(superviseAutoPlay, 1000);
+      var welcomeSupervisor = setTimeout(function () {
+        clearTimeout(welcomeSupervisor);
+        if (!welcomeStarted) {
+          welcomeStarted = true;
+          welcomeCompleted = true;
+          startApp();
+        }
+      }, 3000);
+
+      if (welcomeEle && welcomeEle.readyState > 3) {
+        onCanPlay();
+      }
+    }
+
+    function isMobile() {
+      return (typeof ionic !== "undefined") && (ionic.Platform.isAndroid() || ionic.Platform.isIOS());
+    }
+
+    function onCanPlay() {
+      if (autoPlaySupervisor) {
+        clearTimeout(autoPlaySupervisor);
+        autoPlaySupervisor = 0;
+      }
+      try {
+        onWelcomeStart();
+        autoPlaySupervisor = setTimeout(superviseAutoPlay, 500); // 延时500m再监督，以确保在正常播放，
+      } catch (err) {
+        console.log("can not auto play");
+        console.log(err);
+        needUserAction();
+      }
+    }
+
+    function needUserAction() {
+      if (soundOptionsShown) {
+        return;
+      }
+
+      soundOptionsShown = true;
+    }
+
+    function superviseAutoPlay() {
+      if (autoPlaySupervisor) {
+        clearTimeout(autoPlaySupervisor);
+        autoPlaySupervisor = null;
+      }
+
+      if (hasAutoPlaying()) {
+        return;
+      }
+      needUserAction();
+    }
+
+    function hasAutoPlaying() {
+      return welcomeEle && !(welcomeEle.paused || welcomeEle.muted) &&
+        (welcomeEle.currentTime > 0);
+    }
+
+    function onWelcomeStart() {
+      if (!welcomeStarted) {
+        if (welcomeEle) {
+          welcomeEle.muted = false;
+        }
+        tryPlayWelcome();
+      }
+    }
+
+    function tryPlayWelcome() {
+      try {
+        if (!welcomeEle) {
+          startMmxAnimation();
+          onWelcomeStarted();
+        }
+        var promise = welcomeEle.play();
+        if (promise !== undefined) {
+          promise.then(_ => {
+            console.log("start play OK, in promise");
+            startMmxAnimation();
+            onWelcomeStarted();
+          })
+            .catch(error => {
+              console.log("start play Error or prevented, in promise");
+              console.log(error);
+              needUserAction();
+            });
+        }
+      } catch (err) {
+        console.log("start play Error, in promise catch");
+        needUserAction();
+      }
+    }
+
+    function startMmxAnimation() {
+      var mmxEle = document.getElementsByClassName("mmx_div")[0];
+      if (mmxEle) {
+        mmxEle.classList.remove("hide-it");
+        mmxEle.classList.add("am-welcome");
+      }
+    }
+
+    function onWelcomeStarted() {
+      welcomeStarted = true;
+    }
+
+    function hideElement(id) {
+      var ele = getElememt(id);
+      if (ele) {
+        ele.style.display = "none";
+      }
+    }
+
+    function showElement(id) {
+      var ele = getElememt(id);
+      if (ele) {
+        ele.style.display = "block";
+      }
+    }
+
+    function getElememt(id) {
+      if (!elementsCached[id]) {
+        elementsCached[id] = document.getElementById(id);
+      }
+      var ele = elementsCached[id];
+      if (!ele) {
+        console.log("error: found no element @ id = " + id);
+      }
+      return ele;
+    }
+
+    function onWelcomeEnd() {
+      welcomeCompleted = true;
+      startApp();
+    }
+
+    function loadResources(list, callback) {
+      var numLoaded = 0;
+      var issuedOnLoad = false;
+      for (i = 0; i < list.length; i++) {
+        if (list[i] !== undefined) {
+          TQ.LazyLoading.loadOne(list[i], onLoaded); // just load, not blocker for next step
+          issuedOnLoad = true;
+        }
+      }
+
+      if (!issuedOnLoad) { // 防止它为空， 迫使执行startApp();
+        onLoaded();
+      }
+
+      function onLoaded() {
+        numLoaded++;
+        if (numLoaded >= list.length) {
+          if (callback) {
+            callback();
+          }
+        }
+      }
+    }
+
+    function getShareCodeFromUrl() { // borrowed from Utility
+      var hash = window.location.hash;
+      if (hash) {
+        var params = hash.split("/");
+        if (params.length >= 3) {
+          return params[2];
+        }
+      }
+
+      return "";
+    }
+
+    function onBodyLoaded() {
+      if (window.location.protocol === "http:") {
+        window.location.href = window.location.href.replace("http:", "https:");
+      }
+
+      if (getShareCodeFromUrl()) {
+        welcomeCompleted = true;
+      } else {
+        initWelcomePage();
+      }
+      forceToStartLoadFont();
+      loadResources(srcList0, function () {
+        loadResources(srcList1, function () {
+          loadResources(srcList2, function () {
+            appJsReady = true;
+            startApp();
+          });
+        });
+      });
+    }
+
+    function ensureEnvironment() {
+      const qsParams = TQ.Utility.parseUrl().params;
+      const limitBrowser = !!((!qsParams || !qsParams.anybrowser));
+      let prompt = "";
+      // 浏览器提示
+      if (TQ.BrowserType.isWeChat && !isMiniProgramWebView()) { // 在小程序中可以打开，（正在开发）
+        prompt += "微信版正在开发中, 请使用谷歌浏览器";
+      } else if (!(TQ.BrowserType.isChrome ||
+        TQ.BrowserType.isSafari ||
+        TQ.BrowserType.isEdge ||
+        TQ.BrowserType.isIOS ||
+        TQ.BrowserType.isAndroid ||
+        !limitBrowser)) {
+        prompt += TQ.Locale.getStr("the UDOIDO mainly support Chrome browser, please try Chrome!");
+      }
+
+      // https提示
+      /*
+      if (!isHttps()) {
+        if (prompt) {
+          prompt += ',';
+        } else {
+          prompt += TQ.Locale.getStr("please");
+        }
+        prompt += " " + TQ.Locale.getStr("open the secure url") + "： https://" + location.host;
+      }
+      */
+
+      if (!prompt) {
+        return true;
+      }
+      prompt += "!";
+      TQ.MessageBox.prompt(prompt);
+      return false;
+    }
+
+    function isHttps() {
+      return (location.protocol === "https:");
+    }
+
+    var TQ = TQ || {};
+    (function () {
+      function browserType() {
+      }
+
+      var agent = window.navigator.userAgent;
+      browserType.isWindowPhone = (agent.indexOf("IEMobile") > -1) ||
+        (agent.indexOf("Windows Phone") > -1);
+
+      browserType.isEdge = (agent.indexOf("Edg") > -1);
+      browserType.isSafari = (agent.indexOf("Safari") > -1) &&
+        !browserType.isEdge;
+      browserType.isChrome = (agent.indexOf("Chrome") > -1) &&
+        !browserType.isEdge &&
+        !browserType.isSafari;
+      browserType.isAndroid = (agent.indexOf("Android") > -1) &&
+        !browserType.isWindowPhone;
+      browserType.isIOS = (agent.indexOf("iPod") > -1 ||
+        agent.indexOf("iPhone") > -1 ||
+        agent.indexOf("iPad") > -1) &&
+        !browserType.isWindowPhone;
+      browserType.isWeChat = /micromessenger/.test(agent.toLowerCase());
+      TQ.BrowserType = browserType;
+    }());
+
+    function isMiniProgramWebView() { // 在微信小程序打开的webView
+      return (window && window.__wxjs_environment &&
+        (window.__wxjs_environment === "miniprogram"));
+    }
+
+    function startApp() {
+      if (appJsReady && !appStarted && welcomeCompleted) {
+        if (!ensureEnvironment()) {
+          return;
+        }
+        var srcList3 = [
+          ((!TQ.Config || !TQ.Config.hasPaypal) ? null : "https://www.paypalobjects.com/api/checkout.js"), // DEBUG_ONLY_BEGIN
+
+          "wcy3/debugger/dumpElement.js"
+          // DEBUG_ONLY_END
+        ];
+
+        appStarted = true;
+        angular.bootstrap(document, ["starter"]);
+        angular.element(document.body).injector().get("WCY").preloadWcy();
+
+        var j;
+        for (j = 0; j < srcList3.length; j++) {
+          if (srcList3[j]) {
+            TQ.LazyLoading.loadOne(srcList3[j]);
+          }
+        }
+      }
+    }
+
+    function forceToStartLoadFont() {
+      WebFont.load({
+        custom: {
+          families: ["Ionicons"]
+        },
+        active: function () {
+          console.log("ionicons active " + name);
+          appIconReadyOrError = true;
+        },
+        inactive: function () { // 这个信号不准，明明是load进来了，还触发
+          console.error("ionicons inactive " + name);
+          appIconReadyOrError = true;
+        }
+      });
+    }
+  </script>
+  <!-- this is mykhailo code?/ -->
+  <!-- Dialog container -->
+  <div class="dialog-container object" id="dialogContainer" >
+    <button onclick="dialogcancal()" class="dialogcancal">*</button>
+    <img src="img/bubble/bubble-leftdown.png" alt="Bubble" id="dialogImage" >
+    <p id="dialogText" >Hello, world!</p>
+</div>
+  <script src="bubble.js"></script>
+  <!-- ? -->
+</body>
+
+</html>

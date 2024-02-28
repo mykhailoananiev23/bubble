@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fairy tale input and generate image</title>
+</head>
+<body>
+
+<!-- Textbox for input -->
+<textarea id="inputField" name="freeform" rows="10" cols="96">
+Please generate an image based on the following description. The image will be used in visual presentation of fairy tales (child stories).
+
+</textarea>
+
+<br/>
+
+<!-- Button to trigger the function -->
+<button onclick="generateBgImage()">Generate background image</button>
+<button onclick="generateCharImage()">Generate character image</button>
+<br\>
+
+<div id="generated-img-placeholder">
+</div>
+
+<script>
+  // Function to be called on button click
+  function generateImage(type) {
+    try {
+      var element = document.getElementById("generated-img");
+      element.parentNode.removeChild(element);
+    } catch (error) {
+    }
+
+    const pleaseWait = document.createTextNode("Please wait ...");
+    document.getElementById("generated-img-placeholder").appendChild(pleaseWait);
+
+    // Get the prompt
+    var promptText = document.getElementById("inputField").value;
+
+    (async function(){
+    const response = await fetch('https://api.openai.com/v1/images/generations', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer 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`,
+      },
+      body: JSON.stringify({
+        prompt: promptText,
+        n:1,
+        size:"512x512",
+      }),
+    });
+
+    const result = await response.json();
+    const imageUrl = result.data[0].url;
+
+    const generatedImage = document.createElement('img');
+    generatedImage.setAttribute("id", "generated-img");
+    generatedImage.src = imageUrl;
+    
+    try {
+      const placeholder = document.getElementById("generated-img-placeholder");
+      while (placeholder.firstChild) {
+        placeholder.removeChild(placeholder.lastChild);
+      }
+    } catch (error) {
+    }
+    document.getElementById("generated-img-placeholder").appendChild(generatedImage);
+  })()
+  }
+
+  // Function to handle button click and call generateImage
+  function generateBgImage() {
+    generateImage(1); //1 for background
+  }
+
+  // Function to handle button click and call generateImage
+  function generateCharImage() {
+    generateImage(2); //2 for character
+  }
+</script>
+
+</body>
+</html>

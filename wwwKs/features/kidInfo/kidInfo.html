@@ -1,0 +1,84 @@
+<ion-view view-title="Kid Info" ng-controller="kidInfoController as sc" >
+    <div class="x-center header-font">Kid Info</div>
+    <div>name:
+        <input type="text" class="inline" ng-model="sc.kidInfo.name" placeholder="kid name">
+    </div>
+    <div> birth day
+        <input type="date" class="inline" ng-model="sc.kidInfo.birthday" placeholder="birthday">
+        <label>Male<input type="checkbox" class="inline"></label>
+        <label>Female<input type="checkbox" class="inline"></label>
+    </div>
+    <div>
+        <label>Height<input type="number" class="inline" ng-model="sc.kidInfo.height"></label>
+        <label>Weight<input type="number" class="inline" ng-model="sc.kidInfo.weight"></label>
+    </div>
+
+    <div>
+        <label>Eye color
+            <select ng-model="sc.kidInfo.eyeColor" ng-required="true">
+                <option value="" disabled selected hidden>eye color</option>
+                <option ng-repeat="item in sc.eyeColorTypes">{{item}}</option>
+            </select>
+        </label>
+        <label>Hair Color
+            <select ng-model="sc.kidInfo.hairColor" required>
+                <option ng-repeat="item in sc.hairColorTypes">{{item}}</option>
+            </select>
+        </label>
+    </div>
+
+    <div>Street address
+        <input type="text" class="inline" ng-model="sc.kidInfo.streetAddress" placeholder="street number street name">
+    </div>
+
+    <div>
+        <label>city
+            <input type="text" class="inline" ng-model="sc.kidInfo.city" placeholder="city">
+        </label>
+
+        <label>province
+            <input type="text" class="inline" ng-model="sc.kidInfo.province" placeholder="province">
+        </label>
+
+        <label>postCode
+            <input type="text" class="inline" ng-model="sc.kidInfo.postCode" placeholder="post code">
+        </label>
+    </div>
+    <div>
+        <label>blood type
+            <select ng-model="sc.kidInfo.bloodType">
+                <option  ng-repeat="item in sc.bloodTypes">{{item}}</option>
+            </select>
+        </label>
+
+        <label>mediations
+            <input type="text" class="inline" ng-model="sc.kidInfo.mediations" placeholder="mediations">
+        </label>
+    </div>
+
+    <div>other important information:
+        <input type="text" class="inline" ng-model="sc.kidInfo.others" placeholder="allergies, illness, etc">
+    </div>
+
+    <div>SIN
+        <input type="text" class="inline" ng-model="sc.kidInfo.sin" placeholder="social insurance number">
+    </div>
+
+    <div>
+        <label>Mother  or Guardian:
+            <input type="text" class="inline" ng-model="sc.kidInfo.mother" placeholder="Mother or Guardian's name">
+        </label>
+        <label>Phone Number:
+            <input type="text" class="inline" ng-model="sc.kidInfo.motherPhone" placeholder="kid name">
+        </label>
+    </div>
+
+    <div>
+        <label>Father  or Guardian:
+            <input type="text" class="inline" ng-model="sc.kidInfo.father" placeholder="Mother or Guardian's name">
+        </label>
+        <label>Phone Number:
+            <input type="text" class="inline" ng-model="sc.kidInfo.fatherPhone" placeholder="father's phone number">
+        </label>
+    </div>
+</ion-view>

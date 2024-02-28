@@ -1,0 +1,21 @@
+<ion-view view-title="Physical Desciption" ng-controller="physicalDescController as vm" >
+    <div class="header-font">Physical Desciption</div>
+    <div>
+        <div ng-repeat="item in vm.physicalDesc">
+            <label>{{$index + 1}}: {{item.mark}} at {{item.location}}</label>
+        </div>
+    </div>
+    <div>
+        <label>Mark
+            <select ng-model="vm.mark">
+                <option ng-repeat="item in vm.markTypes">{{item}}</option>
+            </select>
+        </label>
+        <label>Locations
+            <select ng-model="vm.location">
+                <option ng-repeat="item in vm.locations">{{item}} </option>
+            </select>
+        </label>
+        <button ng-click="vm.add()">+</button>
+    </div>
+</ion-view>

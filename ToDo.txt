@@ -1,0 +1,493 @@
+SSL 发放的文件：
+CERTXXX.crt， 简称CRT，安全证书
+CSR.pem:  简称CSR，
+
+Node需要的文件：
+XXXX.key： key文件： 这是用户自己在自己服务器上生成的，（在提交CSR之前）
+ca-boundle文件: 包含root和intermediate证书的文件， renew的时候一般不必，可以用首次颁发的
+
+
+多伦多、温莎： 养老院， 雇用护工、厨师， 护工中介
+
+* 列出需要修改的ICON， 合并到  album中，注意：行列的坐标，宽度，高度等
+美化ICON
+
+
+解决Bug： 无法插入声音文件 
+解决无法录音问题：
+录音的文件没有声音
+
+备份
+https://kf.qq.com/touch/wxappfaq/180122ua6NB7180122zI3AZR.html
+
+BBox应该受Scale的影响
+
+Group 的BBox计算需要考虑实际的比例： 实例：咪咪熊
+
+416-750-8295 immediatel
+ Midland
+
+规范化元素的eType， Type， ElementType, 和 材质类别
+角色分类： 人物？ 道具？背景
+材质分类： 位图， 声音
+结构分类： Group， Joint，
+
+错误：
+
+
+改用常量， 不用神仙数
+  Element.type2eType = function (type) {
+    switch (type) {
+      case "Text":
+        return 4;
+      case "SOUND":
+        return 7;
+      case "Group":
+        return 2;
+      case "Bitmap":
+        return 1;
+      default:
+        return 1;
+    }
+    return 1;
+  };
+
+
+
+if (!desc.eType) {
+      TQ.Log.error('未定义的元素类别eType');
+    } 
+Root cause: 
+ eType混用Element.ETYPE_ 和 
+      eType: TQ.Element.ETYPE_TEXT,
+    if (desc.eType === TQ.Element.ETYPE_BACKGROUND) {
+
+
+  // 元素的类别 eType: 安装角色功能分类
+  TQ.ElementType = {
+    ANCHOR_MARKER: "AnchorMarker",
+    BITMAP: "Bitmap",
+
+ Element.ETYPE_BACKGROUND = 1; //1 背景，
+ 
+ 
+* 删除场景
+ 
+开始Mac浏览器的支持
+* ?anybrowser=1 参数inURL, 允许允许在mac浏览器
+
+Reformat： U2的gulpfile 
+
+
+  
+测试：
+音乐Pane： 麦克风， 音乐库
+背景、人物、道具:  照相机，照片库
+
+自动的测试平台， 确保它OK
+先做最新的功能，在逐渐增加功能
+
+
+改 Tutor/AdminView 		适合新的ID变化
+id-insert-from-local ==》 id-input-camera
+
+
+
+
+ bug： 声音文件选多个，缺只加了最后1个，
+ var soundFile = files[files.length - 1];
+
+素材栏目的ICON们，必须改变，rem为单位的情形，以自适应屏幕大小的变化
+
+mmx_edit_icon1
+
+* Bug: 随动按钮不显示，在插入多次之后
+https://www.cloudwards.net/how-to-get-a-chinese-ip-address/
+https://www.wizcase.com/blog/how-to-get-a-china-ip-address-from-anywhere/
+  
+  正在编辑，F5刷新，无按钮无法进入编辑
+  
+windsor@energywerx.ca
+
+        // 后缀方法， 和 MIME type方法都要有， 以增强兼容性  
+		      // capture：指明用设备， 或已有的文件， // 在IOS上， capture值被忽略，
+      // accept: 指明可接受的media类别， 
+      //multiple="true"： 一次选多张照片，只用于选择已有的文件（而不是从device拍照），！！！
+
+      // domEle.setAttribute("accept", ".jpg, .bmp");
+      // domEle.setAttribute("accept", ".wav, .mp3");
+      // domEle.setAttribute("accept", ".png, .jpeg, image/png, image/jpeg");
+
+  <input id="---input-file-test-camera" type="file" accept="image/*" capture="camera">
+  <input id="id-input-bkg-image"   type="file" accept="video/mp4,video/x-m4v,video/*,.bmp, .gif, .jpeg, .png, image/bmp, image/gif, image/jpeg, image/jpg, image/png, image/*;capture=camera" multiple="true">
+  <input id="---input-file-test-audio-file" type="file" accept="audio/*" multiple="true">
+  <input id="---input-file-test-camera" type="file" accept="image/*" capture="camera">
+
+  <input id="---input-file-test-audio-file" type="file" accept="image/*" multiple="true">
+  <input id="---input-file-test-audio-file" type="file" accept=".png, .jpeg, image/png, image/jpeg" multiple="true">
+
+    // Capture 取值： camera, camcorder and audio.
+
+
+录音似乎不用此input元素
+  <input id="---input-file-test-audio" type="file" accept="audio/*" capture="audio">
+        // formats: ".wav, .mp3, audio/mpeg, audio/mp3, application/zip, audio/wav, audio/wave, audio/x-wav ",
+
+* switchToPeople可以删除了
+  
+  每个人都可以分享、不分享自己的素材、元件？？？？
+
+BPY Enbridge Gas
+
+
+MSP ALECTRA UTIL
+-$164.00
+
+* File Input
+
+* 咪咪熊的头，可以先加关节，再attach小零部件
+  或者， 先先打包， 再选择指定的子元件， 以此子元件作为group的根。
+
+* Joint Mark的中心，应该是非常亮的小红点 （透明是好的， 以看全周边的零部件轮廓
+    TQ.Graphics.drawCircle(s, 0, 0, Marker.RADIUS, GRADIENT_COLOR_S, GRADIENT_COLOR_E);
+
+* 加Joint 可以提前终止取消， （Escape）
+* 打包之后的整体，作为Joint的一个关节。 应该允许， 即： Group作为一个bone
+* 屏幕大小需要自适应， 最大化
+
+								<label class="xing active" ng-show="sc.isMusic">
+									<input type="file" id="id-input-album" style="display:none">
+									<img src="img/changjing/changjing1.png" style="display:inline-block">
+								</label>
+											<label class="my_ac fl">
+				<input type="file" id="id-file-input" style="display:none">
+			</label>
+
+
+
+  * 支持Mac的Chrome： 
+		* 上传本地文件（File input必须由用户的点击打开）
+  
+  * 素材库： tips， 多语言
+
+  * 组装元件的界面： 单独出来，
+    如何分享素材：
+	
+  * 组装狐狸和咪咪熊，2个元件，让所有人都可以使用 
+	** 有关节运动范围的限制
+	** 图层正确
+	** 带基本动作，
+
+intro
+https://youtu.be/wkpiBR2P4tY
+https://youtu.be/wkpiBR2P4tY
+
+附件是狐狸和葡萄故事的素材， 以及我们曾经用过的狼素材。
+
+下面链接是UDOIDO的使用说明（在youtube上）（这是用旧版制作的，尚未更新为新版本）。
+
+狐狸和葡萄外传（上、下）：
+https://youtube.com/playlist?list=PLrN9aSm5F_8kNLo4Wm4FduiIb7UIn8vhl
+https://youtu.be/2vLweoQF9gk
+
+微创意
+UDOIDO使用说明2022版：
+https://youtube.com/playlist?list=PLrN9aSm5F_8kypZ4D1VVh76NsDuK-RLE3
+
+
+* 作品管理，
+1） 自适应多排 M*N
+2） 无照片者， 照片特别小者，用空白
+
+
++++发布1：
+、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、
+* SAG的时间轴有时无法拖动。
+* 主时间轴有时不显示
+* 多重复制的Undo，不支持
++++ 发布2：
+
+* Ipad上，无法显示stage上的图片，但是作品管理页面可以看到屏幕截图
++++ 发布3：
+、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、
+
+
+Trace可以作为独立的元素，绘制，编辑，
+完成之后，再次attach到host.
+
+Trace也可以是独立的元素
+
+
+* Ipad上，无法显示stage上的图片，但是作品管理页面可以看到屏幕截图
+* Ipad上可以输入本地图片，但是Mac无法打开本地图片
+（Mac限制：必须由用户直接点击，不能通过OnClick函数）
+ 
+<input id="---input-file-test" type="file" accept="image/*" capture="camera">
+
+元素不可见的三个层次：
+* opacity = 0: 				占据位置， 可点击
+* visibility: hidden;  		占据位置， 
+* display: none;  			没位置，   完全不见，
+ 
+<input id="---input-file-test" type="file" placeholder="请输入主题" accept="image/*" capture="camera" style="
+    /* visibility: hidden; */
+    /* display: none; */
+    opacity: 0.2;
+">
+
+
+第一目标： 尽快实现重要功能，能用，
+* 轨迹动画
+	轨迹实体的特点：
+	* 临时的， 只有在调整运动的时候，才显示它。平时不显示。
+	* 与时间无关，一次性绘制出全部轨迹，
+	* 在最顶层，不会被任何物体盖住
+	* 不可选中，不可修改？？？
+	* 有0-n条，每1条有自己的开始、结束时间，速度，加速度
+	* 可以共享： 多个物体，公用相同的轨迹， 但是，起止时间不同，速度也看覆盖
+	* 
+	
+	
+* 皮肤操作
+* 人物组合
+
+
+===》 多平台测试， 安卓手机？  IE？？？ firefox？？？ 
+===》  			iphone， mac， pad，
+
+
+
+使用Submodule的：
+
+用子项目管理BackOffice， 避免复制出错， 避免扩大主项目的体积
+
+Core和Udoido瘦身，只引用，不建立repo。
+
+新结构：
+   BackOffice
+   Core+ 派生的BO
+   Udoido + 派生的Core+派生的BO
+
+
+
+///////////////////////////////
+新作品大小配置
+缺省： 本机器最适合的配置
+可配置： 1） 比例， 2） 最佳分辨率； 
+手机竖屏（x*y），
+手机横屏（x*y)，
+FB， 
+选最好的
+==》 空白背景填充什么内容？ Udoido?
+
+把WCYCore作为一个子项目嵌入进来，以保持历史修改。
+同时，也只维护一份copy，一份工具， 避免从core打包给Udoido
+也便于修改、查看历史
+
+
+人物加骨骼
+
+//////////////////////////////
+方便选择原件：
+** 误选，可以扣除
+** 精确选择，避免BBox选择错误的元素
+** 放大： 选择之后，在复原
+
+///////////////////////////////
+选择功能：缩放+像素选择
+
+* 框子选择： 容易误选临近的元件
+* 像素选择： 太小的元件选不到
+
+
+* 缩放： 放大之后，再选， 
+
+///////////////////////////////
+
+多语言切换： 可以自己选择语言，启动时，依次选择： 1） 上次的选择, 2）浏览器缺省
+
+///
+
+						<li>教师邦BONE参加教育创变者大会--“进深”</li>
+						<li>四川 成都 2019.1.16</li>
+						<!--- li>西安赛区于11.20号即将开始</li -->
+						<li>图话贺年版小程序正式上线</li> 
+
+
+* preview界面的Animation按钮，去除？ 为什么要放到这里？ 严格区分：建模与动画？
+   Control panel上的一个开关接口： 进入动画模式？
+   或者 物体编辑属性
+   
+、、、、、、、、、、、、、、、、、、、、、、、、、、、、、
+用单词查image： Open AI  DALL-E
+
+*  转为元件： 只hack前台： TQ.userprofile.canCT = true, 即可
+
+
+、、、、、、、、、、、、、、、、、、、、、
+    2022-11-03	2022-11-03 13:15:27	人民币	转	26,000.00	0.00	126,821.30	网上汇款	1103025009210099339	无锡千宸财务有限公司	中国工商银行股份有限公司无锡锡山支行	102302002507	会计财务费	 
+	2022-11-03	2022-11-03 13:13:27	人民币	转	0.00	11.13		152,821.30	存款利息	 	 	 	 	J2620 单位定期存款部支或销户	 
+	2022-11-03	2022-11-03 13:13:27	人民币	转	0.00	22,254.46	152,810.17	定期销户	408440100200147575	无锡图强科技有限公司	兴业银行	40844	J2620 单位定期存款部支或销户	 
+	2022-11-03	2022-11-03 13:13:27	人民币	转	0.00	11.13		130,555.71	存款利息	 	 	 	 	J2620 单位定期存款部支或销户	 
+	2022-11-03	2022-11-03 13:13:27	人民币	转	0.00	22,254.46	130,544.58	定期销户	408440100200147459	无锡图强科技有限公司	兴业银行	40844	J2620 单位定期存款部支或销户	 
+	2022-11-03	2022-11-03 13:13:26	人民币	转	0.00	11.13		108,290.12	存款利息	 	 	 	 	J2620 单位定期存款部支或销户	 
+	2022-11-03	2022-11-03 13:13:26	人民币	转	0.00	22,254.46	108,278.99	定期销户	408440100200147330	无锡图强科技有限公司	兴业银行	40844	J2620 单位定期存款部支或销户	 
+	2022-11-03	2022-11-03 13:13:26	人民币	转	0.00	5.18			  86,024.53	存款利息	 	 	 	 	J2620 单位定期存款部支或销户	 
+	2022-11-03	2022-11-03 13:13:26	人民币	转	0.00	57,405.92	  86,019.35	定期销户	408440100200142673	无锡图强科技有限公司	兴业银行
+	
+
+PCMag: Proton, Nord 图, Surfshark, TunnelBear图, IVPN, MULLVAD,
+ 
+VPN, into 中国， 在中国有服务器CS
+XX ExpressVPN，无CS
+
+Netflix 把VPN服务器的IP列入黑名单， 但是NordVPN，IP太大
+
+
+
+//////
+Code	Occupation
+5243	Theatre, fashion, exhibit and other creative designers
+
+Program Development
+Show Guidelines 
+Name of Developer	Expert Type	Professional Affiliation	Staff member at College?	Telephone Number
+
+Gary Zhang	Program Design Expert / Adult Education Expert
+Ed. D.,20 years experience in program development	No	(416) 473-6889
+
+Shaun Zhang	Subject Matter Expert
+BCS, Software Engineer	No	(647) 772-1310
+
+
+
+https://www.pcc.tcu.gov.on.ca/PARISExtWeb/public/success.xhtml#bodycontent
+
+GameDesign369#$
+
+生活的城市： 胡家庄
+
+
+///////////
+best buy: 剩余
+665.10
+258.63
+---------
+396.47  ? 406.47?
+-----------
+
+
+
+      // if (ele.isJoint() || ele.isRoot()) {
+      //   continue;
+      // }
+	  
+	  ？用 isBone() 代替组合判断Joint和isRoot
+	  
+	  
+	  给Bone附加元素1：可以添加附件了，（限制只能有1个Bone，但是不要求先选中Bone。自动忽略后续多余的bone）
+	  
+	  Test Case自动化：
+
+关节附件测试：
+
+选中不同的元素拆：
+* 选 Root，拆开整个链条， 每一个元素都是独立的
+* 选带附件的Bone： 只拆除附件， 附件编程独立元素， 关节完整
+* 选上游Bone（相对于带附件Bone），Bone及其下游及下游的所有附件都拆开
+* 选下游Bone（相对于带附件Bone），对于此带附件bone及其附件无影响
+
+拆关节测试：Root， Joint， 叶子joint
+拆Group测试： 多重Group， 带关节的Group
+
+
+  
+  iPad 选型：
+mini: 7.9寸屏幕，Lighting接头
+尺寸为7.75 x 5.82英寸（197 x 148毫米），斜角距离为9.7英寸（246.4毫米）
+
+
+Air: 触控ID与电源键合二为一。。
+
+Bug：无法删除元件的原版，要求删除原版，结果却删除了升级版？
+
+
+：
+
+墙上的插座
+
+窗户双密封条
+
+视觉检查： Visual Inspection
+
+墙角、拐角（窗户、门与墙体的拐角）  All exterior corners
+户外阀门，插座： Outdoor water faucets
+
+Where siding and chimneys meet
+Areas where the foundation and the bottom of exterior brick or siding meet.
+Inside your home, inspect around the following areas for any cracks and gaps that could cause air leaks:
+
+Electrical outlets
+Switch plates
+Door and window frames
+Electrical and gas service entrances
+Baseboards
+Weather stripping around doors
+Fireplace dampers
+Attic hatches
+Wall- or window-mounted air conditioners.
+Cable TV and phone lines
+Where dryer vents pass through walls
+Vents and fans.
+Also look for gaps around pipes and wires, foundation seals, and mail slots. Check to see if the caulking and weather stripping are applied properly, leaving no gaps or cracks, and are in good condition. Check the exterior caulking around doors and windows, and see whether exterior storm doors and primary doors seal tightly.
+
+Inspect windows and doors for air leaks. See if you can rattle them, since movement means possible air leaks. If you can see daylight around a door or window frame, then the door or window leaks. You can usually seal these leaks by caulking or weatherstripping them. Check the storm windows to see if they fit and are not broken.
+
+You may also wish to consider replacing your old windows and doors with newer, high-performance ones. If new factory-made doors or windows are too costly, you can install low-cost plastic sheets over the windows.
+
+Building Pressurization Test
+While not as successful as as blower door test, if you are having difficulty locating leaks, you may want to conduct a basic building pressurization test to increase infiltration through cracks and leaks, making them easier to detect:
+
+Turn off all combustion appliances such as gas burning furnaces and water heaters on a cool, very windy day.
+Shut all windows, exterior doors, and fireplace flues.
+Turn on all exhaust fans that blow air outside, such as your clothes dryer, bathroom fans, or stove vents, or use a large window fan to suck the air out of the rooms.
+Light an incense stick and carefully pass it around the edges of common leak sites. Wherever the smoke wavers or is sucked out of or blown into the room, there's a draft. You can also use a damp hand to locate leaks; any drafts will feel cool to your hand.
+If you don't want to turn off your furnace, you can just turn on all your exhaust fans to depressurize your home.
+
+Other air-leak detection methods include the following:
+
+Shining flashlight at night over all potential gaps while a partner observes the house from outside. Large cracks will show up as rays of light. Not a good way to detect small cracks.
+Shut a door or window on a dollar bill. If you can pull the dollar bill out without it dragging, you're losing energy.
+
+
+
+
+
+* 布局：自适应， 占全局
+* 彻底去除Kotu的所有代码
+
+动漫超市： 一个素材网站：
+	通过关键词，搜索素材，透明化的、带关节的、带动作的人物、道具、场景。
+拍动漫： 一个工具， 可以是线下使用
+
+
+
+识别浏览器： 
+Edge: 
+'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36 Edg/107.0.1418.56'
+
+Chrome:
+'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36'
+
+Safari: 
+"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15
+(KHTML, like Gecko) Version/14.1.2 Safari/605.1.15" = $1
+
+自己建立git服务器（远程的，多一个地方备份代码，更安全）：
+      https://zhuanlan.zhihu.com/p/40371444
+
+Nov 14,
+Feb 14, 季度报表
+4000， left
+Feb 02, 2023	PYT TO: 11754180281	0.01		$6,204.00
+

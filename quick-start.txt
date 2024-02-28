@@ -1,0 +1,27 @@
+Linux服务器重新启动：
+
+1) 数据库
+  sudo systemctl start mongod    # 手动启动
+  sudo systemctl status mongod  # 检查状态
+  
+sudo systemctl enable mongod  # 要求自动启动， 在reboot之后
+
+2） 后台：
+sudo nohup node backOffice/bin/server.js&
+
+！！！多伦多1号是管理员 ！！！ 多伦多向上走都是钱
+!!! 每个人都可以分享、不分享自己的素材、元件
+快速开始(Windows平台)
+* 启动db服务器和app服务器, 在目录E:\Doc_qian2\udoido2下运行： 
+    startUdoido.bat
+	 
+* 打开前端
+    https://www.udoido.com
+	(如果打不开， 检查确认此url转定义到本地，在“C:\Windows\System32\drivers\etc\hosts”)
+	
+* 打包发布(使用gulp）
+    releaseWithServer.bat
+  （ 它自动分多次运行，打包成3个ZIP）
+  需要以udoido2-prod-test目录下的老发布包为准
+  
+	

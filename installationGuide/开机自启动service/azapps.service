@@ -1,0 +1,15 @@
+[Unit]
+Description=az-apps-service
+After=multi-user.target network.target  network-online.target mongod.service
+ 
+[Service]
+#Type=forking
+Type=simple
+ExecStart=/bin/bash /az/azapps.sh
+Restart=on-failure
+TimeoutStopSec=180s
+# ExecStop=/bin/kill -9 $(pidof node)
+# ExecReload=/bin/kill -9 $(pidof node) && /bin/bash /az/azapps.sh
+ 
+[Install]
+WantedBy=multi-user.target
